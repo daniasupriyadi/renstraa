@@ -256,59 +256,37 @@
               <!-- Basic Layout & Basic with Icons -->
               <div class="row">
                 <!-- Basic Layout -->
-                <!DOCTYPE html>
-<html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
-</head>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Tabel Rencana Strategis</title>
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/default/easyui.css">
-    <link rel="stylesheet" type="text/css" href="https://www.jeasyui.com/easyui/themes/icon.css">
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.jeasyui.com/easyui/jquery.easyui.min.js"></script>
-</head>
-<body>
-    <h2>Tabel Rencana Strategis</h2>
-    
-    <table class="easyui-treegrid" style="width: 700px; height: 300px;" title=""
-           url="treegrid3_getdata.php"
-           rownumbers="true"
-           idField="id" treeField="name">
-        <thead>
-            <tr>
-                <th field="name" width="200">Tujuan</th>
-                <th field="quantity" width="100" align="right">Sasaran Kegiatan</th>
-                <th field="price" width="200" align="right" formatter="formatDollar">Indikator Kinerja Kegiatan</th>
-                <th field="total" width="200" align="right" formatter="formatDollar">Indikator Kinerja Sub Kegiatan</th>
-            </tr>
-        </thead>
-    </table>
-    <script>
-        function formatDollar(value) {
-            if (value) {
-                return '$' + value;
-            } else {
-                return '';
-            }
-        }
-    </script>
-</body>
-</html>
+                <div id="treegridResult" style="margin-top: 20px;"></div>
 
+                <script>
+                    $(document).ready(function(){
+                        $('#submitButton').click(function(){
+                            $.post($('#myForm').attr('action'), $('#myForm').serialize(), function(data){
+                                // Susun tata letak treegrid
+                                $('#treegridResult').treegrid({
+                                    data: [data],
+                                    idField: 'id',
+                                    treeField: 'tujuan',
+                                    columns:[[
+                                        {field:'tujuan', title:'Tujuan', width:200},
+                                        {field:'sasaran_kegiatan', title:'Sasaran Kegiatan', width:200},
+                                        {field:'indikator_kinerja_kegiatan', title:'Indikator Kinerja Kegiatan', width:200},
+                                        {field:'indikator_kinerja_sub_kegiatan', title:'Indikator Kinerja Sub Kegiatan', width:200},
+                                        {field:'kode', title:'Kode', width:100},
+                                        {field:'indikator_kinerja_unit_kerja', title:'Indikator Kinerja Unit Kerja', width:200},
+                                        {field:'pic', title:'PIC', width:100},
+                                        {field:'target', title:'Target', width:100},
+                                        {field:'realisasi', title:'Realisasi', width:100}
+                                    ]]
+                                });
+                            }, 'json');
+                        });
+                    });
+                </script>
             <!-- / Content -->
 
             <!-- Footer -->
            
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->

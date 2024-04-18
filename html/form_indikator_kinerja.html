@@ -267,93 +267,85 @@
               <!-- Input Data Renstra -->
               <div class="row">
                 <div class="col-xxl">
-                  <div class="card mb-4">
-                    <div class="card-header d-flex align-items-center justify-content-between">
-                      <h5 class="mb-0">Input Data Renstra</h5>
+                    <div class="card mb-4">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Input Data Renstra</h5>
+                        </div>
+                        <form id="myForm" action="proses.php" method="POST">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label for="tujuan" class="form-label">Tujuan</label>
+                                    <select id="tujuan" name="tujuan" class="select2 form-select">
+                                        <option value=""></option>
+                                        <option value="1">Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</option>
+                                        <option value="2">Terciptanya ekosistem akademik yang unggul dengan tata kelola yang baik dan terintegritas</option>
+                                        <option value="3">Terwujudnya budaya mutu melalui penguatan sistem penjaminan mutu internal</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="sasaran_kegiatan" class="form-label">Sasaran Kegiatan</label>
+                                    <select id="sasaran_kegiatan" name="sasaran_kegiatan" class="select2 form-select">
+                                        <option value=""></option>
+                                        <option value="1">Meningkatnya kualitas lulusan pendidikan tinggi</option>
+                                        <option value="2">Meningkatnya kualitas dosen pendidikan tinggi</option>
+                                        <option value="3">Meningkatnya kualitas kurikulum dan pembelajaran</option>
+                                        <option value="4">Meningkatnya tata kelola satuan kerja di lingkungan Ditjen Pendidikan Vokasi</option>
+                                        <option value="5">Meningkatnya budaya mutu akademik dan kemahasiswaan</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="indikator_kegiatan">Indikator Kinerja Kegiatan</label>
+                                    <input type="text" class="form-control" id="indikator_kegiatan" name="indikator_kegiatan" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="indikator_sub_kegiatan">Indikator Kinerja Sub Kegiatan</label>
+                                    <input type="text" class="form-control" id="indikator_sub_kegiatan" name="indikator_sub_kegiatan" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="kode">Kode</label>
+                                    <input type="text" class="form-control" id="kode" name="kode" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="indikator_unit_kerja" class="form-label">Indikator Kinerja Unit Kerja</label>
+                                    <input class="form-control" type="text" name="indikator_unit_kerja" id="indikator_unit_kerja" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="pic" class="form-label">PIC</label>
+                                    <select id="pic" name="pic" class="select2 form-select">
+                                        <option value=""></option>
+                                        <option value="Ukarni">Ukarni</option>
+                                        <option value="P3M">P3M</option>
+                                        <!-- Tambahkan opsi PIC lainnya sesuai kebutuhan -->
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="target">Target</label>
+                                    <input type="text" id="target" name="target" class="form-control" placeholder="">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="realisasi">Realisasi</label>
+                                    <input type="text" class="form-control" id="realisasi" name="realisasi" placeholder="">
+                                </div>
+                                <button type="button" id="submitButton" class="btn btn-primary">Send</button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="card-body">
-                      <div class="mb-3">
-                        <label for="tujuan" class="form-label">Tujuan</label>
-                        <select id="tujuan" class="select2 form-select">
-                          <option value=""></option>
-                          <option value="en">Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</option>
-                          <option value="fr">Terciptanya ekosistem akademik yang unggul dengan tata kelola yang baik dan terintegritas</option>
-                          <option value="de">Terwujudnya budaya mutu melalui penguatan sistem penjaminan mutu internal </option>
-                        </select>
-                      </div>
-                      <div class="mb-3">
-                        <label for="sasaran_kegiatan" class="form-label">Sasaran Kegiatan</label>
-                        <select id="sasaran_kegiatan" class="select2 form-select">
-                          <option value=""></option>
-                          <option value="en">Meningkatnya kualitas lulusan pendidikan tinggi</option>
-                          <option value="fr">Meningkatnya kualitas dosen pendidikan tinggi</option>
-                          <option value="de">Meningkatnya kualitas kurikulum dan pembelajaran</option>
-                          <option value="pt">Meningkatnya tata kelola satuan kerja di lingkungan Ditjen Pendidikan Vokasi</option>
-                          <option value="mn">Meningkatnya budaya mutu akademik dan kemahasiswaan</option>
-                        </select>
-                      </div>
-                      <form>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-fullname">Indikator Kinerja Kegiatan</label>
-                          <input type="text" class="form-control" id="basic-default-fullname" placeholder="" />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-company">Indikator Kinerja Sub Kegiatan</label>
-                          <input type="text" class="form-control" id="basic-default-company" placeholder="" />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-company">Kode</label>
-                          <input type="text" class="form-control" id="basic-default-company" placeholder="" />
-                        </div>
-                        <div class="mb-3">
-                          <label for="lastName" class="form-label">Indikator Kinerja Unit Kerja</label>
-                          <input class="form-control" type="text" name="lastName" id="lastName" value="" />
-                        </div>
-                        <div class="mb-3">
-                          <label for="unit" class="form-label">PIC</label>
-                          <select id="unit" class="select2 form-select">
-                            <option value=""></option>
-                            <option value="en">Ukarni</option>
-                            <option value="fr">P3M</option>
-                            <option value="de">Penalaran</option>
-                            <option value="pt">Minat Bakat</option>
-                            <option value="pr">Perencanaan</option>
-                            <option value="pt">P4MP Pembelajaran</option>
-                            <option value="pr">P4MP SPM</option>
-                            <option value="pt">Upuk</option>
-                            <option value="pr">BAK</option>
-                            <option value="pt">SPI</option>
-                            <option value="pr">Koord Umum</option>
-                            <option value="pt">MRC</option>
-                            <option value="pr">SPC</option>
-                          </select>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-phone">Target</label>
-                          <input
-                            type="text"
-                            id="basic-default-phone"
-                            class="form-control phone-mask"
-                            placeholder=""
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-default-company">Realisasi</label>
-                          <input type="text" class="form-control" id="basic-default-company" placeholder="" />
-                        </div>
-                        <!-- <div class="mb-3">
-                          <label class="form-label" for="basic-default-message">Message</label>
-                          <textarea
-                            id="basic-default-message"
-                            class="form-control"
-                            placeholder="Hi, Do you have a moment to talk Joe?"
-                          ></textarea>
-                        </div> -->
-                        <button type="submit" class="btn btn-primary">Send</button>
-                      </form>
-                    </div> 
-                  </div>
                 </div>
+            </div>
+            
+            <div id="treegridResult"></div>
+            
+            <script>
+                $(document).ready(function(){
+                    $('#submitButton').click(function(){
+                        $.post($('#myForm').attr('action'), $('#myForm').serialize(), function(data){
+                            $('#treegridResult').html('<p>Data berhasil ditambahkan:</p>' +
+                                '<pre>' + JSON.stringify(data, null, 2) + '</pre>');
+                        }, 'json');
+                    });
+                });
+            </script>
+            
                 <!-- <div class="col-xl">
                   <div class="card mb-4">
                     <div class="card-header d-flex justify-content-between align-items-center">
