@@ -130,20 +130,6 @@
                 <div data-i18n="Analytics">Dashboard</div>
               </a>
             </li>
-
-            <!-- <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="pages-account-settings-account.html" class="menu-link">
-                    <div data-i18n="Account">Account</div>
-                  </a>
-                </li>
-              </ul>
-            </li> -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -275,22 +261,22 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="tujuan" class="form-label">Tujuan</label>
-                                    <select id="tujuan" name="tujuan" class="select2 form-select">
-                                        <option value=""></option>
-                                        <option value="1">Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</option>
-                                        <option value="2">Terciptanya ekosistem akademik yang unggul dengan tata kelola yang baik dan terintegritas</option>
-                                        <option value="3">Terwujudnya budaya mutu melalui penguatan sistem penjaminan mutu internal</option>
+                                    <select id="tujuan" class="select2 form-select">
+                                      <option value=""></option>
+                                      <option value="en">Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</option>
+                                      <option value="fr">Terciptanya ekosistem akademik yang unggul dengan tata kelola yang baik dan terintegritas</option>
+                                      <option value="de">Terwujudnya budaya mutu melalui penguatan sistem penjaminan mutu internal </option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
                                     <label for="sasaran_kegiatan" class="form-label">Sasaran Kegiatan</label>
                                     <select id="sasaran_kegiatan" name="sasaran_kegiatan" class="select2 form-select">
-                                        <option value=""></option>
-                                        <option value="1">Meningkatnya kualitas lulusan pendidikan tinggi</option>
-                                        <option value="2">Meningkatnya kualitas dosen pendidikan tinggi</option>
-                                        <option value="3">Meningkatnya kualitas kurikulum dan pembelajaran</option>
-                                        <option value="4">Meningkatnya tata kelola satuan kerja di lingkungan Ditjen Pendidikan Vokasi</option>
-                                        <option value="5">Meningkatnya budaya mutu akademik dan kemahasiswaan</option>
+                                      <option value=""></option>
+                                      <option value="en">Meningkatnya kualitas lulusan pendidikan tinggi</option>
+                                      <option value="fr">Meningkatnya kualitas dosen pendidikan tinggi</option>
+                                      <option value="de">Meningkatnya kualitas kurikulum dan pembelajaran</option>
+                                      <option value="pt">Meningkatnya tata kelola satuan kerja di lingkungan Ditjen Pendidikan Vokasi</option>
+                                      <option value="mn">Meningkatnya budaya mutu akademik dan kemahasiswaan</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -312,9 +298,20 @@
                                 <div class="mb-3">
                                     <label for="pic" class="form-label">PIC</label>
                                     <select id="pic" name="pic" class="select2 form-select">
-                                        <option value=""></option>
-                                        <option value="Ukarni">Ukarni</option>
-                                        <option value="P3M">P3M</option>
+                                      <option value=""></option>
+                                      <option value="en">Ukarni</option>
+                                      <option value="fr">P3M</option>
+                                      <option value="de">Penalaran</option>
+                                      <option value="pt">Minat Bakat</option>
+                                      <option value="pr">Perencanaan</option>
+                                      <option value="pt">P4MP Pembelajaran</option>
+                                      <option value="pr">P4MP SPM</option>
+                                      <option value="pt">Upuk</option>
+                                      <option value="pr">BAK</option>
+                                      <option value="pt">SPI</option>
+                                      <option value="pr">Koord Umum</option>
+                                      <option value="pt">MRC</option>
+                                      <option value="pr">SPC</option>
                                         <!-- Tambahkan opsi PIC lainnya sesuai kebutuhan -->
                                     </select>
                                 </div>
@@ -345,99 +342,6 @@
                     });
                 });
             </script>
-            
-                <!-- <div class="col-xl">
-                  <div class="card mb-4">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5 class="mb-0">Basic with Icons</h5> 
-                      <small class="text-muted float-end">Merged input group</small>
-                    </div>
-                    <div class="card-body">
-                      <form>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-fullname2" class="input-group-text"
-                              ><i class="bx bx-user"></i
-                            ></span>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="basic-icon-default-fullname"
-                              placeholder="John Doe"
-                              aria-label="John Doe"
-                              aria-describedby="basic-icon-default-fullname2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-company">Company</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-company2" class="input-group-text"
-                              ><i class="bx bx-buildings"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-company"
-                              class="form-control"
-                              placeholder="ACME Inc."
-                              aria-label="ACME Inc."
-                              aria-describedby="basic-icon-default-company2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-email">Email</label>
-                          <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-envelope"></i></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-email"
-                              class="form-control"
-                              placeholder="john.doe"
-                              aria-label="john.doe"
-                              aria-describedby="basic-icon-default-email2"
-                            />
-                            <span id="basic-icon-default-email2" class="input-group-text">@example.com</span>
-                          </div>
-                          <div class="form-text">You can use letters, numbers & periods</div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-phone">Phone No</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-phone2" class="input-group-text"
-                              ><i class="bx bx-phone"></i
-                            ></span>
-                            <input
-                              type="text"
-                              id="basic-icon-default-phone"
-                              class="form-control phone-mask"
-                              placeholder="658 799 8941"
-                              aria-label="658 799 8941"
-                              aria-describedby="basic-icon-default-phone2"
-                            />
-                          </div>
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label" for="basic-icon-default-message">Message</label>
-                          <div class="input-group input-group-merge">
-                            <span id="basic-icon-default-message2" class="input-group-text"
-                              ><i class="bx bx-comment"></i
-                            ></span>
-                            <textarea
-                              id="basic-icon-default-message"
-                              class="form-control"
-                              placeholder="Hi, Do you have a moment to talk Joe?"
-                              aria-label="Hi, Do you have a moment to talk Joe?"
-                              aria-describedby="basic-icon-default-message2"
-                            ></textarea>
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                      </form>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
             <!-- / Content -->
