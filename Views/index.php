@@ -8,7 +8,7 @@
   data-assets-path="../assets/"
   data-template="vertical-menu-template-free"
 >
-  <head>
+  <head> 
     <meta charset="utf-8" />
     <meta
       name="viewport"
