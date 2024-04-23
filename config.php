@@ -2,9 +2,9 @@
 // Koneksi db
 
 $dbHost = 'localhost';
-$dbName = 'renstraami';
+$dbName = 'renstra_ami';
 $dbUsername = 'root';
-$dbPassword = '';
+$dbPassword = 'Okokokdalll1';
 
 $mysql = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
