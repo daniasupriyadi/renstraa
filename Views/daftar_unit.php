@@ -42,12 +42,15 @@
 
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
-    <!-- Page CSS -->
-
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
-
     <script src="../assets/js/config.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
+    <style>
+        .small_column{
+          width: 50px;
+        }
+    </style>
   </head>
 
   <body>
@@ -125,7 +128,7 @@
             <div class="menu-inner-shadow"></div>
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="index.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
@@ -133,15 +136,15 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item open">
+            <li class="menu-item open active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Data Master</div>
               </a>
 
               <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="daftar_unit.php" class="menu-link">
+                <li class="menu-item active">
+                  <a href="daftar_unit.php " class="menu-link ">
                     <div data-i18n="Without menu">Daftar Unit</div>
                   </a>
                 </li>
@@ -252,76 +255,47 @@
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
+          <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Basic Tables</h4> -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="col-lg-12 mb-4 order-0">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Renstra - PENS</h5>
-                          <!-- <p class="mb-4">
-                            You have done <span class="fw-bold">72%</span> more sales today. Check your new badge in
-                            your profile.
-                          </p> -->
+              <div class="card">
+                <h3 class="card-header">Daftar Tabel Unit</h3>
+                <div class="card-body">
 
-                          <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/man-with-laptop-light.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png"
-                          />
-                        </div>
-                      </div>
-                    </div>
+                <div class="d-flex flex-row mb-4 demo-inline-spacing"> 
+                <a type="button" class="btn btn-primary text-white" href="Form_Tambah/tambah_unit.php">
+                    <span class="tf-icons bx bx-plus text-white"></span>&nbsp;Tambah Data
+                </a>
+                <a type="button" class="btn btn-primary text-white">
+                    <span class="tf-icons bx bx-download text-white"></span>&nbsp;Unduh Data
+               </a>
+
+                </div>
+                  <div class="table-responsive text-nowrap">
+                  <table id="table" class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th class="small_column">No</th>
+                              <th>Nama Unit / PIC</th>
+                              <th class="small_column">Edit</th>
+                              <th class="small_column">Hapus</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr>
+                              <td class="small_column">1</td>
+                              <td>Direktur</td>
+                              <td><a href="Form_Edit/edit_unit.php"><i class='bx bx-pencil'></i></a></td>
+                              <td><a href=""><i class='bx bxs-trash-alt'></i></a></td>
+                          </tr>
+                      </tbody>
+                  </table>
+                  </div>
                   </div>
                 </div>
-               
-                <!-- Total Revenue -->
-                <div class="col-12 col-lg-12 order-2 order-md-3 order-lg-2 mb-4">
-                  <div class="card">
-                    <div class="row row-bordered g-0">
-                      <div class="col-md-8">
-                        <h5 class="card-header m-0 me-2 pb-3">Diagram Pencapaian</h5>
-                        <div id="totalRevenueChart" class="px-2"></div>
-                      </div>
-                      <div class="col-md-4">
-                        <div class="card-body">
-                          <div class="text-center">
-                            <div class="dropdown">
-                              <button
-                                class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                type="button"
-                                id="growthReportId"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false"
-                              >
-                                2022
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div id="growthChart"></div>
-                        <div class="text-center fw-semibold pt-3 mb-2">62% Company Growth</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                </div>
+              </div>
+          </div>
+          </div>
    
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -329,6 +303,15 @@
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> -->
+    
+<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
+
+    <script>
+       $(document).ready( function () {
+       $('#table').DataTable();
+      } );
+    </script>
 
     <script src="../assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
