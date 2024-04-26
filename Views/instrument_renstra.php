@@ -50,6 +50,13 @@
         .small_column{
           width: 50px;
         }
+        th{
+          text-align: center;
+          vertical-align: middle;
+        }
+        table{
+          color: black;
+        }
     </style>
   </head>
 
@@ -83,46 +90,112 @@
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Data
                 </button>
-                <button type="button" class="btn btn-primary">
+                <a href="../Controllers/Export_Data/ExportInstrument.php" class="btn btn-primary">
                     <span class="tf-icons bx bx-download"></span>&nbsp;Unduh Data
-                </button>
+                </a>
                 </div>
 
-                  <div class="table-responsive text-nowrap">
-                  <table id="table" class="table table-hover">
-                      <thead>
-                          <tr>
-                              <th class="small_column">Tujuan</th>
-                              <th class="small_column">Sasaran Kegiatan</th>
-                              <th class="small_column">Indikator Kinerja Kegiatan(IKK)</th>
-                              <th class="small_column">Indikator Kinerja Sub Kegiatan</th>
-                              <th class="small_column">Kode</th>
-                              <th class="small_column">Ikuk</th>
-                              <th class="small_column">PIC</th>
-                              <th class="small_column">Aksi</th>
-                          </tr>
+                <div class="table-responsive text-nowrap">
+                <table style="width:100%; background-color: white; border: solid grey 2px; color: black;"  class="table table-hover table-bordered">
+                  <thead style="background-color: yellowgreen; color: black;">
+                  <tr>
+                    <th  rowspan="2">Tujuan</th>
+                    <th rowspan="2" >Sasaran Kegiatan</th>
+                    <th rowspan="2" >Indikator Kinerja Kegiatan</th>
+                    <th rowspan="2">Indikator Kinerja Sub Kegiatan</th>
+                    <th colspan="3" >Indikator Kinerja Unit Kerja</th>
+                    <th rowspan="3" >PIC/Unit</th>
+                  </tr>
+                        <tr>
+                          <th colspan="1">Kode</th>
+                          <th colspan="1">IKUK</th>
+                        </tr>
                       </thead>
                       <tbody>
+                       <?php
+                       include('../config.php');
+                       $query = mysqli_query($connection, "SELECT 
+                                                              tujuan.tujuan_id, 
+                                                              isi_tujuan, 
+                                                              isi_sasaran_kegiatan
+                                                            FROM 
+                                                              tujuan
+                                                            INNER JOIN 
+                                                              sasaran_kegiatan ON tujuan.tujuan_id = sasaran_kegiatan.tujuan_id
+                                                            ORDER BY 
+                                                              tujuan.tujuan_id
+                                            ");
+                        while($data = mysqli_fetch_array($query)){
+                        ?>
+                        <tr>
+                          <td colspan="8" style="background-color: antiquewhite;"><?php echo $data['isi_tujuan']; ?></td>
+                        </tr>
+
+                        <!-- Query Sasaran Kegiatan -->
+                        <?php
+                        $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
+                                                                          (isi_sasaran_kegiatan)
+                                                                      FROM 
+                                                                        sasaran_kegiatan
+                                                                      WHERE 
+                                                                        tujuan_id = {$data['tujuan_id']}
+                                                                      ");
+                        while($branch = mysqli_fetch_array($sasaran_kegiatan)){
+                          ?>
                           <tr>
-                              <td class="small_column">1</td>
-                              <td class="small_column"></td>
-                              <td class="small_column"></td>
-                              <td class="small_column"></td>
-                              <td class="small_column"></td>
-                              <td class="small_column"></td>
-                              <td class="small_column"></td>
-                              <td>
-                                <a href="" class="ms-2">
-                                    <i class='bx bx-pencil'></i>
-                                </a>
-                                <a href="" class="ms-2">
-                                    <i class='bx bxs-trash-alt' ></i>
-                                </a>
-                              </td>
-                             
+                            <td colspan="1"></td>
+                            <td colspan="7" style="background-color:  rgb(112, 228, 112);"><?php echo $branch['isi_sasaran_kegiatan'] ?></td>
                           </tr>
+                          <?php
+                        }      
+                        ?>           
+
+                      <?php
+                        }
+                       ?>
                       </tbody>
-                  </table>
+
+                      <!-- Data Dummy -->
+                      <!-- <tbody>
+                          <tr style="background-color: antiquewhite;">
+                              <td colspan="8">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
+                          </tr>
+                          <tr>
+                              <td colspan="1"></td>
+                              <td colspan="6" style="background-color: rgb(112, 228, 112);">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
+                              <td colspan="1"  style="background-color: rgb(112, 228, 112);">Direktur</td>
+                          </tr>
+                          <tr>
+                              <td colspan="2"></td>
+                              <td colspan="5" style="background-color: rgb(224, 196, 159);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
+                              <td colspan="1"  style="background-color:  rgb(224, 196, 159);"></td>
+                          </tr>
+                          <tr>
+                              <td colspan="3"></td>
+                              <td colspan="4" style="background-color: rgb(218, 218, 236);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
+                              <td colspan="1"  style="background-color:  rgb(218, 218, 236);">Wadir 4</td>
+                          </tr>
+                          <tr>
+                              <td colspan="4"></td>
+                              <td colspan="1" style="background-color: white;">U11.1</td>
+                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
+                              <td colspan="1" style="background-color: white;">Ukarni</td>
+                          </tr>
+                          <tr>
+                              <td colspan="4"></td>
+                              <td colspan="1" style="background-color: white;">U11.1</td>
+                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
+                              <td colspan="1" style="background-color: white;">Ukarni</td>
+                          </tr>
+                          <tr>
+                              <td colspan="4"></td>
+                              <td colspan="1" style="background-color: white;">U11.1</td>
+                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
+                              <td colspan="1" style="background-color: white;">Ukarni</td>
+                          </tr>
+                      </tbody> -->
+                      <!-- Data Dummy -->
+                   </table>
                   </div>
                   </div>
                 </div>
