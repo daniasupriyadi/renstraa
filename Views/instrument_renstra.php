@@ -3,61 +3,15 @@
   lang="en"
   class="light-style layout-menu-fixed"
   dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../assets/"
-  data-template="vertical-menu-template-free"
+  branch_1-theme="theme-default"
+  branch_1-assets-path="../assets/"
+  branch_1-template="vertical-menu-template-free"
 >
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
-    />
-
-    <title>Beranda</title>
-
-    <meta name="description" content="" />
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Icons. Uncomment required icon fonts -->
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
-
-    <!-- Core CSS -->
-    <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="../assets/css/demo.css" />
-
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
-
-    <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
-    <script src="../assets/js/config.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.dataTables.css" />
-    <style>
-        .small_column{
-          width: 50px;
-        }
-        th{
-          text-align: center;
-          vertical-align: middle;
-        }
-        table{
-          color: black;
-        }
-    </style>
+    <title>Instrument Renstra</title>
+    <?php
+    include 'Layout/head.php';
+    ?>
   </head>
 
   <body>
@@ -69,7 +23,6 @@
         include 'Layout/sidebar.php';
         ?>
         <!-- / Menu Sidebar -->
-
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
@@ -88,16 +41,16 @@
                 
                 <div class="d-flex flex-row mb-4 demo-inline-spacing"> 
                 <button type="button" class="btn btn-primary">
-                    <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Data
+                    <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Data Instrument
                 </button>
-                <a href="../Controllers/Export_Data/ExportInstrument.php" class="btn btn-primary">
-                    <span class="tf-icons bx bx-download"></span>&nbsp;Unduh Data
+                <a href="../Controllers/Export_branch_1/ExportInstrument.php" class="btn btn-primary">
+                    <span class="tf-icons bx bx-download"></span>&nbsp;Unduh Instrument
                 </a>
                 </div>
 
                 <div class="table-responsive text-nowrap">
                 <table style="width:100%; background-color: white; border: solid grey 2px; color: black;"  class="table table-hover table-bordered">
-                  <thead style="background-color: yellowgreen; color: black;">
+                  <thead class="table-head">
                   <tr>
                     <th  rowspan="2">Tujuan</th>
                     <th rowspan="2" >Sasaran Kegiatan</th>
@@ -114,10 +67,9 @@
                       <tbody>
                        <?php
                        include('../config.php');
-                       $query = mysqli_query($connection, "SELECT 
-                                                              tujuan.tujuan_id, 
-                                                              isi_tujuan, 
-                                                              isi_sasaran_kegiatan
+                       $tujuan = mysqli_query($connection, "SELECT
+                                                              DISTINCT(tujuan.tujuan_id), 
+                                                              isi_tujuan
                                                             FROM 
                                                               tujuan
                                                             INNER JOIN 
@@ -125,37 +77,47 @@
                                                             ORDER BY 
                                                               tujuan.tujuan_id
                                             ");
-                        while($data = mysqli_fetch_array($query)){
+                        while($branch_1 = mysqli_fetch_array($tujuan)){
                         ?>
-                        <tr>
-                          <td colspan="8" style="background-color: antiquewhite;"><?php echo $data['isi_tujuan']; ?></td>
+                        <tr class="parent-row">
+                          <td colspan="8" style="background-color: antiquewhite;">
+                            <span class="toggle-row">[+]</span><?php echo $branch_1['isi_tujuan'];?>
+                          </td>
                         </tr>
 
                         <!-- Query Sasaran Kegiatan -->
                         <?php
                         $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
-                                                                          (isi_sasaran_kegiatan)
+                                                                          (isi_sasaran_kegiatan), 
+                                                                          unit.nama_unit as pic
                                                                       FROM 
                                                                         sasaran_kegiatan
+                                                                      INNER JOIN 
+                                                                        unit ON unit.unit_id = sasaran_kegiatan.unit_id
                                                                       WHERE 
-                                                                        tujuan_id = {$data['tujuan_id']}
+                                                                        tujuan_id = {$branch_1['tujuan_id']}
                                                                       ");
                         while($branch = mysqli_fetch_array($sasaran_kegiatan)){
                           ?>
-                          <tr>
+                          <tr class="child-row">
                             <td colspan="1"></td>
-                            <td colspan="7" style="background-color:  rgb(112, 228, 112);"><?php echo $branch['isi_sasaran_kegiatan'] ?></td>
+                            <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch['isi_sasaran_kegiatan'] ?></td>
+                            <td colspan="1" style="background-color:  rgb(112, 228, 112);"><?php echo $branch['pic'] ?></td>
                           </tr>
+
+                          <!-- Child Ke Tiga -->
+                          <!-- <tr class="child-row-1">
+                            <td>test</td>
+                          </tr> -->
                           <?php
                         }      
                         ?>           
-
                       <?php
                         }
                        ?>
                       </tbody>
 
-                      <!-- Data Dummy -->
+                      <!-- branch_1 Dummy -->
                       <!-- <tbody>
                           <tr style="background-color: antiquewhite;">
                               <td colspan="8">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
@@ -194,7 +156,7 @@
                               <td colspan="1" style="background-color: white;">Ukarni</td>
                           </tr>
                       </tbody> -->
-                      <!-- Data Dummy -->
+                      <!-- branch_1 Dummy -->
                    </table>
                   </div>
                   </div>
@@ -204,34 +166,20 @@
           </div>
    
     <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <!-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> -->
+    <?php
+    include 'Layout/corejs.php'
+    ?>
+    <script> 
+    $(document).ready(function(){
+        $(".toggle-row").click(function(){
+            $(this).closest('tr').nextUntil('.parent-row').toggle();
+            var text = $(this).text() === '[+]' ? '[-]' : '[+]';
+            $(this).text(text);
+        });
+    });
+</script>
+
     
-<script src="https://cdn.datatables.net/2.0.5/js/dataTables.js"></script>
-
-    <script>
-       $(document).ready( function () {
-       $('#table').DataTable();
-      } );
-    </script>
-
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
-
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
-
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- /Core JS -->
   </body>
 </html>

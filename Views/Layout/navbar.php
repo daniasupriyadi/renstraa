@@ -1,12 +1,6 @@
 <!-- Membuat Relatif Path untuk mengarahkan ke folder root -->
 <?php
-// $root_path_image = $_SERVER['DOCUMENT_ROOT'];
-// $image = $root_path_image."/renstraa/assets/img/avatars/";
-// echo $image."1.png";
-?>
-
-<?php
-echo ""
+include 'base_url.php';
 ?>
 <!-- Navbar -->
 <nav
@@ -42,46 +36,31 @@ echo ""
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                  <div class="d-flex align-items-center">
+                    <div class="avatar avatar-online me-3">
+                      <img src="<?php echo $base_url?>/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
+                    <div class="flex-grow-1 me-3">
+                            <span class="fw-semibold d-block">John Doe</span>
+                            <small class="text-muted">PJM</small>
+                    </div>
+                    <div>
+                    <i class='bx bx-chevron-down'></i>
+                    </div>
+                  </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="#">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
+                      <a  class="dropdown-item" href="<?php echo $base_url?>/Views/profile.php">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">Profil</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Pengaturan</span>
-                      </a>
-                    </li>
-                    <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" href="<?php echo $base_url?>/Views/Auth/login.php">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Keluar</span>
                       </a>

@@ -1,5 +1,6 @@
 <!-- Membuat Fungsi PageActive di setiap page-->
 <?php
+include 'base_url.php';
 function isPageActive($pageName){
   $currentPage = basename($_SERVER['PHP_SELF']);
 
@@ -88,14 +89,14 @@ function isPageActive($pageName){
           <ul class="menu-inner py-1">
             <!-- Dashboard -->
             <li class="menu-item <?php echo isPageActive('index.php') ?>">
-              <a href="index.php" class="menu-link">
+              <a href="<?php echo $base_url?>/Views/index.php" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Beranda</div>
               </a>
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item open">
+            <li class="menu-item open <?php echo isPageActive(['daftar_unit.php','tambah_unit.php','edit_unit.php','instrument_renstra.php'])?>">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-layout"></i>
                 <div data-i18n="Layouts">Data Master</div>
@@ -103,16 +104,30 @@ function isPageActive($pageName){
 
               <ul class="menu-sub">
                 <li class="menu-item <?php echo isPageActive(['daftar_unit.php', 'tambah_unit.php', 'edit_unit.php']) ?>">
-                  <a href="daftar_unit.php" class="menu-link">
+                  <a href="<?php echo $base_url?>/Views/daftar_unit.php" class="menu-link">
                     <div data-i18n="Without menu">Daftar Unit</div>
                   </a>
                 </li>
                 <li class="menu-item <?php echo isPageActive(['instrument_renstra.php']) ?>">
-                  <a href="instrument_renstra.php" class="menu-link">
+                  <a href="<?php echo $base_url?>/Views/instrument_renstra.php" class="menu-link">
                     <div data-i18n="Without navbar">Instrument Renstra</div>
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li class="menu-item <?php echo isPageActive(['profile.php', 'edit_profile.php']) ?>">
+              <a href="<?php echo $base_url?>/Views/profile.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Profile</div>
+              </a>
+            </li>
+
+            <li class="menu-item <?php echo isPageActive('keluar.php') ?>">
+              <a href="<?php echo $base_url?>/Views/Auth/login.php" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-log-out"></i>
+                <div data-i18n="Analytics">Keluar</div>
+              </a>
             </li>
           </ul>
         </aside>

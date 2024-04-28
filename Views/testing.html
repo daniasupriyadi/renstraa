@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TreeGrid Example</title>
+  <link rel="stylesheet" href="https://cdn.treegrid.com/enterprise/production/treegrid.css">
+</head>
+<body>
+  <table id="treegrid">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Nama</th>
+        <th>ParentId</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr id="1">
+        <td>1</td>
+        <td>Parent 1</td>
+        <td>null</td>
+      </tr>
+      <tr id="2" data-parent-id="1">
+        <td>2</td>
+        <td>Child 1</td>
+        <td>1</td>
+      </tr>
+      <tr id="3" data-parent-id="1">
+        <td>3</td>
+        <td>Child 2</td>
+        <td>1</td>
+      </tr>
+      <tr id="4" data-parent-id="2">
+        <td>4</td>
+        <td>Grandchild 1</td>
+        <td>2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script src="https://cdn.treegrid.com/enterprise/production/treegrid.js"></script>
+  <script>
+    // Inisialisasi TreeGrid
+    document.addEventListener('DOMContentLoaded', function() {
+      new TreeGrid('treegrid', {
+        childField: 'data-parent-id', // Nama atribut data yang menunjukkan id induk
+        parentIdField: 'null', // Nilai yang menunjukkan bahwa baris adalah root node
+        expanderExpandedClass: 'treegrid-expander-expanded', // Kelas CSS untuk ikon expand yang sudah terbuka
+        expanderCollapsedClass: 'treegrid-expander-collapsed' // Kelas CSS untuk ikon collapse
+      });
+    });
+  </script>
+</body>
+</html>
