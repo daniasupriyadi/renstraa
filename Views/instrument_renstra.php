@@ -100,7 +100,7 @@
                                                                       ");
                         while($branch_2 = mysqli_fetch_array($sasaran_kegiatan)){
                           ?>
-                          <tr class="child-row" >
+                          <tr class="" >
                             <td colspan="1"></td>
                             <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch_2['isi_sasaran_kegiatan'] ?></td>
                             <td colspan="1" style="background-color:  rgb(112, 228, 112);"><?php echo $branch_2['pic'] ?></td>
@@ -121,9 +121,9 @@
                                                             ");
                           while($branch_3 = mysqli_fetch_array($ikk)){
                             ?>
-                            <tr>
+                            <tr class="child-row">
                               <td colspan="2"></td>
-                              <td colspan="4" style="background-color: burlywood;"><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
+                              <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
                               <td colspan="2" style="background-color: burlywood;"><?php echo $branch_3['unit'] ?></td>
                             </tr>
                           <?php
@@ -140,9 +140,9 @@
                                                               ");     
                                     while($branch_4 = mysqli_fetch_array($iksk)){
                                       ?>
-                                      <tr>
+                                      <tr class="child-row">
                                         <td colspan="3"></td>
-                                        <td colspan="4" style="background-color: aquamarine;"><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan']?></td>
+                                        <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan']?></td>
                                         <td colspan="1"><?php echo $branch_4['unit']?></td>
                                       </tr>
                                       <?php
@@ -160,7 +160,7 @@
                                                 ");
                             while($branch_5 = mysqli_fetch_array($ikuk)){
                               ?>
-                              <tr>
+                              <tr class="child-row">
                                 <td colspan="4"></td>
                                 <td colspan="1" style="background-color: white;"><?php echo $branch_5['kode_ikuk'] ?></td>
                                 <td colspan="2" style="background-color: white;"><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
@@ -240,15 +240,31 @@
     <?php
     include 'Layout/corejs.php'
     ?>
-    <script> 
-    $(document).ready(function(){
-        $(".toggle-row").click(function(){
-            $(this).closest('tr').nextUntil('.parent-row').toggle();
-            var text = $(this).text() === '[+]' ? '[-]' : '[+]';
-            $(this).text(text);
+        <script>
+        $(document).ready(function() {
+            $(".toggle-row").click(function() {
+                // Temukan baris parent terdekat
+                var $parentRow = $(this).closest('tr');
+                
+                // Temukan semua baris child setelah baris parent
+                var $childRows = $parentRow.nextAll('tr');
+                
+                // Hitung jumlah baris child yang perlu disembunyikan
+                var numChildRowsToHide = $childRows.length - 1; // Exclude the parent row itself
+                
+                // Semua child rows harus disembunyikan
+                $childRows.slice(0, numChildRowsToHide).toggle();
+                
+                // Mengubah teks toggle sesuai dengan kondisi terakhir
+                var text = $parentRow.is(':visible') ? '[-]' : '[+]';
+                $(this).text(text);
+            });
         });
-    });
-</script>
+        </script>
+
+
+
+
 
     
     <!-- /Core JS -->
