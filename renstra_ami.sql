@@ -1,30 +1,10 @@
--- Active: 1713877694562@@127.0.0.1@3306@renstra_ami
--- Drop Database Jika Ada 
+-- Drop Database jika ada 
 DROP DATABASE renstra_ami;
 
 -- Membuat Database AMI
 CREATE DATABASE renstra_ami;
 
 USE renstra_ami;
-
--- Buat Data Auth -----------------------------------------------------------
-CREATE TABLE role(
-	role_id INT AUTO_INCREMENT, 
-	nama_role VARCHAR(128) NOT NULL UNIQUE, 
-	PRIMARY KEY(role_id)
-);
-
-CREATE TABLE user(
-	user_id INT AUTO_INCREMENT, 
-	role_id INT NOT NULL,
-	nama VARCHAR(128) NOT NULL, 
-	email VARCHAR(128) NOT NULL UNIQUE, 
-	password VARCHAR(64) NOT NULL, 
-	PRIMARY KEY(user_id),
-	CONSTRAINT FK_ROLE 
-		FOREIGN KEY(role_id)
-		REFERENCES role(role_id)
-);
 
 -- Buat Data Master ---------------------------------------------------------
 CREATE TABLE unit(
@@ -101,6 +81,23 @@ CREATE TABLE indikator_kinerja_unit_kerja(
 		REFERENCES unit(unit_id)
 );
 
+
+-- Buat Data Auth -----------------------------------------------------------
+
+
+CREATE TABLE user(
+	user_id INT AUTO_INCREMENT, 
+	unit_id INT NOT NULL,
+	nama VARCHAR(128) NOT NULL, 
+	email VARCHAR(128) NOT NULL UNIQUE, 
+	password VARCHAR(64) NOT NULL, 
+	PRIMARY KEY(user_id),
+	CONSTRAINT FK_UNIT_ROLE 
+		FOREIGN KEY(unit_id)
+		REFERENCES unit(unit_id)
+);
+
+
 -- Insert Data Master Unit
 INSERT INTO unit (nama_unit) values ('Direktur'); -- 1
 INSERT INTO unit (nama_unit) values ('Wadir 1'); -- 2
@@ -162,4 +159,3 @@ INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, uni
 INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.14', 'Jumlah mahasiswa berprestasi juara 1  bidang akademik tingkat nasional', NULL);
 INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
 
-SELECT * FROM unit;

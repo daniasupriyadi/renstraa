@@ -43,13 +43,13 @@
                 <button type="button" class="btn btn-primary">
                     <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Data Instrument
                 </button>
-                <a href="../Controllers/Export_branch_1/ExportInstrument.php" class="btn btn-primary">
+                <a href="../Controllers/Export_Data/ExportInstrument.php" class="btn btn-primary">
                     <span class="tf-icons bx bx-download"></span>&nbsp;Unduh Instrument
                 </a>
                 </div>
 
                 <div class="table-responsive text-nowrap">
-                <table style="width:100%; background-color: white; border: solid grey 2px; color: black;"  class="table table-hover table-bordered">
+                <table style="width:100%; background-color: #F8FAFF; border: solid grey 2px; color: black;"  class="table table-hover table-bordered">
                   <thead class="table-head">
                   <tr>
                     <th  rowspan="2">Tujuan</th>
@@ -71,7 +71,7 @@
                                                               DISTINCT(tujuan.tujuan_id), 
                                                               isi_tujuan
                                                             FROM 
-                                                              tujuan
+                                                              tujuan 
                                                             INNER JOIN 
                                                               sasaran_kegiatan ON tujuan.tujuan_id = sasaran_kegiatan.tujuan_id
                                                             ORDER BY 
@@ -88,6 +88,7 @@
                         <!-- Query Sasaran Kegiatan -->
                         <?php
                         $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
+                                                                          (sasaran_kegiatan.sasaran_kegiatan_id) as sk_id, 
                                                                           (isi_sasaran_kegiatan), 
                                                                           unit.nama_unit as pic
                                                                       FROM 
@@ -97,21 +98,91 @@
                                                                       WHERE 
                                                                         tujuan_id = {$branch_1['tujuan_id']}
                                                                       ");
-                        while($branch = mysqli_fetch_array($sasaran_kegiatan)){
+                        while($branch_2 = mysqli_fetch_array($sasaran_kegiatan)){
                           ?>
-                          <tr class="child-row">
+                          <tr class="child-row" >
                             <td colspan="1"></td>
-                            <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch['isi_sasaran_kegiatan'] ?></td>
-                            <td colspan="1" style="background-color:  rgb(112, 228, 112);"><?php echo $branch['pic'] ?></td>
+                            <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch_2['isi_sasaran_kegiatan'] ?></td>
+                            <td colspan="1" style="background-color:  rgb(112, 228, 112);"><?php echo $branch_2['pic'] ?></td>
                           </tr>
 
                           <!-- Child Ke Tiga -->
-                          <!-- <tr class="child-row-1">
-                            <td>test</td>
-                          </tr> -->
                           <?php
+                          $ikk = mysqli_query($connection, "SELECT DISTINCT
+                                                              indikator_kinerja_kegiatan.indikator_kinerja_kegiatan_id as ikk_id, 
+                                                              isi_indikator_kinerja_kegiatan, 
+                                                              unit.nama_unit as unit
+                                                            FROM 
+                                                              indikator_kinerja_kegiatan
+                                                            LEFT JOIN  
+                                                              unit ON unit.unit_id = indikator_kinerja_kegiatan.unit_id
+                                                            WHERE  
+                                                              sasaran_kegiatan_id = {$branch_2['sk_id']}
+                                                            ");
+                          while($branch_3 = mysqli_fetch_array($ikk)){
+                            ?>
+                            <tr>
+                              <td colspan="2"></td>
+                              <td colspan="4" style="background-color: burlywood;"><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
+                              <td colspan="2" style="background-color: burlywood;"><?php echo $branch_3['unit'] ?></td>
+                            </tr>
+                          <?php
+                          $iksk = mysqli_query($connection, "SELECT DISTINCT
+                                                                indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id as iksk_id, 
+                                                                isi_indikator_kinerja_sub_kegiatan, 
+                                                                unit.nama_unit as unit
+                                                              FROM 
+                                                                indikator_kinerja_sub_kegiatan
+                                                              LEFT JOIN 
+                                                                unit ON indikator_kinerja_sub_kegiatan.unit_id = unit.unit_id
+                                                              WHERE 
+                                                                indikator_kinerja_kegiatan_id = {$branch_3['ikk_id']}
+                                                              ");     
+                                    while($branch_4 = mysqli_fetch_array($iksk)){
+                                      ?>
+                                      <tr>
+                                        <td colspan="3"></td>
+                                        <td colspan="4" style="background-color: aquamarine;"><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan']?></td>
+                                        <td colspan="1"><?php echo $branch_4['unit']?></td>
+                                      </tr>
+                                      <?php
+                                    $ikuk = mysqli_query($connection, "SELECT DISTINCT
+                                                                  indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id, 
+                                                                  kode_ikuk, 
+                                                                  isi_indikator_kinerja_unit_kerja, 
+                                                                  unit.nama_unit as unit
+                                                                FROM 
+                                                                  indikator_kinerja_unit_kerja
+                                                                INNER JOIN 
+                                                                  unit ON indikator_kinerja_unit_kerja.unit_id = unit.unit_id
+                                                                WHERE 
+                                                                  indikator_kinerja_unit_kerja_id = {$branch_4['iksk_id']}
+                                                ");
+                            while($branch_5 = mysqli_fetch_array($ikuk)){
+                              ?>
+                              <tr>
+                                <td colspan="4"></td>
+                                <td colspan="1" style="background-color: white;"><?php echo $branch_5['kode_ikuk'] ?></td>
+                                <td colspan="2" style="background-color: white;"><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
+                                <td colspan="" style="background-color: white;"><?php echo $branch_5['unit'] ?></td>
+                              </tr>
+                          <?php
+                            }
+                          ?>
+
+                          <?php
+                            }  
+                          ?>    
+                           
+
+                            <?php                   
+                            }
+                            ?>
+                          
+                        <?php
                         }      
-                        ?>           
+                        ?> 
+
                       <?php
                         }
                        ?>
