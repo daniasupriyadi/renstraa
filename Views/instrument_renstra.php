@@ -173,8 +173,6 @@
                           <?php
                             }  
                           ?>    
-                           
-
                             <?php                   
                             }
                             ?>
@@ -188,46 +186,7 @@
                        ?>
                       </tbody>
 
-                      <!-- branch_1 Dummy -->
-                      <!-- <tbody>
-                          <tr style="background-color: antiquewhite;">
-                              <td colspan="8">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
-                          </tr>
-                          <tr>
-                              <td colspan="1"></td>
-                              <td colspan="6" style="background-color: rgb(112, 228, 112);">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
-                              <td colspan="1"  style="background-color: rgb(112, 228, 112);">Direktur</td>
-                          </tr>
-                          <tr>
-                              <td colspan="2"></td>
-                              <td colspan="5" style="background-color: rgb(224, 196, 159);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
-                              <td colspan="1"  style="background-color:  rgb(224, 196, 159);"></td>
-                          </tr>
-                          <tr>
-                              <td colspan="3"></td>
-                              <td colspan="4" style="background-color: rgb(218, 218, 236);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
-                              <td colspan="1"  style="background-color:  rgb(218, 218, 236);">Wadir 4</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                      </tbody> -->
-                      <!-- branch_1 Dummy -->
+                     
                    </table>
                   </div>
                   </div>
@@ -243,19 +202,11 @@
         <script>
         $(document).ready(function() {
             $(".toggle-row").click(function() {
-                // Temukan baris parent terdekat
                 var $parentRow = $(this).closest('tr');
-                
-                // Temukan semua baris child setelah baris parent
                 var $childRows = $parentRow.nextAll('tr');
                 
-                // Hitung jumlah baris child yang perlu disembunyikan
                 var numChildRowsToHide = $childRows.length - 1; // Exclude the parent row itself
-                
-                // Semua child rows harus disembunyikan
                 $childRows.slice(0, numChildRowsToHide).toggle();
-                
-                // Mengubah teks toggle sesuai dengan kondisi terakhir
                 var text = $parentRow.is(':visible') ? '[-]' : '[+]';
                 $(this).text(text);
             });
