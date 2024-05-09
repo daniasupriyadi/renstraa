@@ -9,7 +9,7 @@ include 'base_url.php';
     />
     <meta name="description" content="" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?php echo $base_url ?>/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?php echo $base_url ?>/assets/img/pjm.ico" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

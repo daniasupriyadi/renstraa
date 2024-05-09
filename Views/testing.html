@@ -1,40 +1,113 @@
-<!-- branch_1 Dummy -->
-                      <tbody>
-                          <tr style="background-color: antiquewhite;">
-                              <td colspan="8">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
-                          </tr>
-                          <tr>
-                              <td colspan="1"></td>
-                              <td colspan="6" style="background-color: rgb(112, 228, 112);">1. Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global</td>
-                              <td colspan="1"  style="background-color: rgb(112, 228, 112);">Direktur</td>
-                          </tr>
-                          <tr>
-                              <td colspan="2"></td>
-                              <td colspan="5" style="background-color: rgb(224, 196, 159);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
-                              <td colspan="1"  style="background-color:  rgb(224, 196, 159);"></td>
-                          </tr>
-                          <tr>
-                              <td colspan="3"></td>
-                              <td colspan="4" style="background-color: rgb(218, 218, 236);">[IKU 1.1] Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi; atau menjadi wiraswasta</td>
-                              <td colspan="1"  style="background-color:  rgb(218, 218, 236);">Wadir 4</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                          <tr>
-                              <td colspan="4"></td>
-                              <td colspan="1" style="background-color: white;">U11.1</td>
-                              <td colspan="2" style="background-color: white;">Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP
-                              <td colspan="1" style="background-color: white;">Ukarni</td>
-                          </tr>
-                      </tbody> 
-                      <!-- branch_1 Dummy -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Nested</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+    .form-container {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: calc(100% - 100px);
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
+.input-group button {
+  width: 90px;
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+#sasaran-container {
+  margin-top: 10px;
+}
+
+.sasaran-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.sasaran-input-group input {
+  flex: 1;
+  margin-right: 5px;
+}
+
+</style>
+</head>
+<body>
+<div class="form-container">
+  <h2>Form Nested</h2>
+  <form id="nested-form">
+    <div class="input-group">
+      <label for="tujuan">Tujuan:</label>
+      <input type="text" id="tujuan" name="tujuan" required>
+    </div>
+    <div class="input-group">
+      <label for="sasaran">Sasaran Kegiatan:</label>
+      <input type="text" id="sasaran" name="sasaran" required>
+      <button type="button" id="add-sasaran">Tambah Sasaran</button>
+    </div>
+    <div id="sasaran-container"></div>
+    <button type="submit">Submit</button>
+  </form>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+  const addSasaranButton = document.getElementById("add-sasaran");
+  const sasaranContainer = document.getElementById("sasaran-container");
+
+  addSasaranButton.addEventListener("click", function() {
+    const sasaranInputGroup = document.createElement("div");
+    sasaranInputGroup.classList.add("sasaran-input-group");
+
+    const input = document.createElement("input");
+    input.type = "text";
+    input.name = "sasaran";
+    input.placeholder = "Sasaran Kegiatan";
+    input.required = true;
+
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Hapus";
+    removeButton.type = "button";
+    removeButton.addEventListener("click", function() {
+      sasaranInputGroup.remove();
+    });
+
+    sasaranInputGroup.appendChild(input);
+    sasaranInputGroup.appendChild(removeButton);
+    sasaranContainer.appendChild(sasaranInputGroup);
+  });
+
+  const form = document.getElementById("nested-form");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    // Kirim data formulir di sini
+  });
+});
+
+</script>
+<script src="script.js"></script>
+</body>
+</html>

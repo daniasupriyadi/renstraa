@@ -81,6 +81,72 @@ CREATE TABLE indikator_kinerja_unit_kerja(
 		REFERENCES unit(unit_id)
 );
 
+-- Data Transaksi ----------------------------------------------------------
+CREATE TABLE waktu_pelaksanaan(
+	waktu_pelaksanaan_id INT AUTO_INCREMENT, 
+	tahun YEAR NOT NULL, 
+	tanggal_pembukaan DATE, 
+	tanggal_penutupan DATE,
+	PRIMARY KEY(waktu_pelaksanaan_id)
+);
+
+CREATE TABLE transaksi_sasaran_kegiatan(
+	transaksi_sasaran_kegiatan_id INT AUTO_INCREMENT, 
+	sasaran_kegiatan_id INT,
+	waktu_pelaksanaan_id INT, 
+	realisasi_sasaran_kegiatan INT,
+	PRIMARY KEY(transaksi_sasaran_kegiatan_id), 
+	CONSTRAINT FK_WAKTU_PELAKSANAAN
+		FOREIGN KEY(waktu_pelaksanaan_id)
+		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id), 
+	CONSTRAINT FK_SKK_IDD
+		FOREIGN KEY(sasaran_kegiatan_id)
+		REFERENCES sasaran_kegiatan(sasaran_kegiatan_id)
+);
+
+CREATE TABLE transaksi_ikk(
+	transaksi_ikk_id INT AUTO_INCREMENT,  
+	waktu_pelaksanaan_id INT,
+	indikator_kinerja_kegiatan_id INT,
+	realisasi_ikk INT, 
+	PRIMARY KEY (transaksi_ikk_id),
+	CONSTRAINT FK_IKK_ID
+		FOREIGN KEY(indikator_kinerja_kegiatan_id)
+		REFERENCES indikator_kinerja_kegiatan(indikator_kinerja_kegiatan_id),
+	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKK
+		FOREIGN KEY(waktu_pelaksanaan_id)
+		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+);
+
+
+CREATE TABLE transaksi_iksk(
+	transaksi_iksk_id INT AUTO_INCREMENT,
+	indikator_kinerja_sub_kegiatan_id INT,
+	waktu_pelaksanaan_id INT, 
+	realisasi_iksk INT, 
+	PRIMARY KEY(transaksi_iksk_id), 
+	CONSTRAINT FK_IKSK_id
+		FOREIGN KEY(indikator_kinerja_sub_kegiatan_id)
+		REFERENCES indikator_kinerja_sub_kegiatan(indikator_kinerja_sub_kegiatan_id), 
+	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKSK
+		FOREIGN KEY(waktu_pelaksanaan_id)
+		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+);
+
+CREATE TABLE transaksi_ikuk(
+	transaksi_ikuk_id INT AUTO_INCREMENT,  
+	indikator_kinerja_unit_kerja_id INT, 
+	waktu_pelaksanaan_id INT, 
+	realisasi_ikuk INT, 
+	PRIMARY KEY(transaksi_ikuk_id), 
+	CONSTRAINT FK_IKUK
+		FOREIGN KEY(indikator_kinerja_unit_kerja_id)
+		REFERENCES  indikator_kinerja_unit_kerja(indikator_kinerja_unit_kerja_id),
+	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKUK
+		FOREIGN KEY(waktu_pelaksanaan_id)
+		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+);
+	
 
 -- Buat Data Auth -----------------------------------------------------------
 
