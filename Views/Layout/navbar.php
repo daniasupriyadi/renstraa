@@ -37,7 +37,7 @@ include 'base_url.php';
               <small class="text-muted">PJM</small>
             </div>
             <div>
-              <i class='bx bx-chevron-down'></i>
+              <i class='bx  bx-chevron-down'></i>
             </div>
           </div>
         </a>

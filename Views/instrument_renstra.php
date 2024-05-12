@@ -6,6 +6,45 @@
   <?php
   include 'Layout/head.php';
   ?>
+  <style>
+    .parent-row,
+    .child-row {
+      white-space: pre-line;
+      word-wrap: break-word;
+      text-align: justify;
+      color: black;
+    }
+
+    .table-responsive {
+      position: relative;
+      overflow-x: auto;
+    }
+
+    .table-responsive .tbody-container {
+      max-height: 500px;
+      overflow-y: auto;
+    }
+
+    .table-responsive .table-head {
+      position: sticky;
+      top: 0;
+      background-color: yellow;
+      z-index: 1;
+    }
+
+    .table-responsive table {
+      width: 100%;
+    }
+
+    .vertical-role {
+      display: inline-block;
+      margin: 0 5px;
+      height: 100%;
+      border-left: 1px solid #333;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -33,8 +72,8 @@
               <h3 class="card-header">Tabel Rencana Strategis</h3>
               <div class="card-body">
 
-                <div class="d-flex flex-row mb-4 demo-inline-spacing">
-                  <a href="./Form_Tambah/tambah_instrumen_renstra.php" type="button" class="btn btn-primary">
+                <div class="d-flex flex-row mb-2">
+                  <a href="./Form_Tambah/tambah_instrumen_renstra.php" type="button" class="btn btn-primary me-3">
                     <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Data Instrument
                   </a>
                   <a href="../Controllers/Export_Data/ExportInstrument.php" class="btn btn-primary">
@@ -42,9 +81,9 @@
                   </a>
                 </div>
 
-                <div class="table-responsive text-nowrap">
+                <div class="table-responsive text-nowrap" style="max-height: 640px;">
                   <table style="width:100%; background-color: #F8FAFF; border: solid grey 2px; color: black;" class="table table-hover table-bordered">
-                    <thead class="table-head">
+                    <thead class="table-head" style="height: 48px;">
                       <tr>
                         <th rowspan="2">Tujuan</th>
                         <th rowspan="2">Sasaran Kegiatan</th>
@@ -52,7 +91,8 @@
                         <th rowspan="2">Indikator Kinerja Sub Kegiatan</th>
                         <th colspan="3">Indikator Kinerja Unit Kerja</th>
                         <th rowspan="3">PIC/Unit</th>
-                        <th rowspan="2" colspan="2">Aksi</th>
+                        <th rowspan="2" colspan="1">Edit</th>
+                        <th rowspan="2" colspan="1">Hapus</th>
                       </tr>
                       <tr>
                         <th colspan="1">Kode</th>
@@ -60,10 +100,11 @@
                       </tr>
                     </thead>
 
-                    <tbody>
-                      <?php
-                      include('../config.php');
-                      $tujuan = mysqli_query($connection, "SELECT
+                    <div class="tbody-container">
+                      <tbody class="scrollable-body" style="max-height: 600px; overflow-y: auto; ">
+                        <?php
+                        include('../config.php');
+                        $tujuan = mysqli_query($connection, "SELECT
                                         DISTINCT(tujuan.tujuan_id), 
                                         isi_tujuan
                                       FROM 
@@ -73,17 +114,23 @@
                                       ORDER BY 
                                         tujuan.tujuan_id
                                     ");
-                      while ($branch_1 = mysqli_fetch_array($tujuan)) {
-                      ?>
-                        <tr class="parent-row">
-                          <td colspan="8" style="background-color: antiquewhite;">
-                            <span class="toggle-row">[+]</span><?php echo $branch_1['isi_tujuan']; ?>
-                          </td>
-                        </tr>
+                        while ($branch_1 = mysqli_fetch_array($tujuan)) {
+                        ?>
+                          <tr class="parent-row">
+                            <td colspan="8" style="background-color: antiquewhite;">
+                              <span class="toggle-row">[+]</span><?php echo $branch_1['isi_tujuan']; ?>
+                            </td>
+                            <td class="">
+                              <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                            </td>
+                            <td>
+                              <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                            </td>
+                          </tr>
 
-                        <!-- Query Sasaran Kegiatan -->
-                        <?php
-                        $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
+                          <!-- Query Sasaran Kegiatan -->
+                          <?php
+                          $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
                                                     (sasaran_kegiatan.sasaran_kegiatan_id) as sk_id, 
                                                     (isi_sasaran_kegiatan), 
                                                     unit.nama_unit as pic
@@ -94,17 +141,23 @@
                                                 WHERE 
                                                   tujuan_id = {$branch_1['tujuan_id']}
                                                 ");
-                        while ($branch_2 = mysqli_fetch_array($sasaran_kegiatan)) {
-                        ?>
-                          <tr class="">
-                            <td colspan="1"></td>
-                            <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch_2['isi_sasaran_kegiatan'] ?></td>
-                            <td colspan="1" style="background-color:  rgb(112, 228, 112);"><?php echo $branch_2['pic'] ?></td>
-                          </tr>
+                          while ($branch_2 = mysqli_fetch_array($sasaran_kegiatan)) {
+                          ?>
+                            <tr class="">
+                              <td colspan="1"></td>
+                              <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch_2['isi_sasaran_kegiatan'] ?></td>
+                              <td colspan="1" style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['pic'] ?></td>
+                              <td class="">
+                                <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                              </td>
+                              <td>
+                                <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                              </td>
+                            </tr>
 
-                          <!-- Child Ke Tiga -->
-                          <?php
-                          $ikk = mysqli_query($connection, "SELECT DISTINCT
+                            <!-- Child Ke Tiga -->
+                            <?php
+                            $ikk = mysqli_query($connection, "SELECT DISTINCT
                                         indikator_kinerja_kegiatan.indikator_kinerja_kegiatan_id as ikk_id, 
                                         isi_indikator_kinerja_kegiatan, 
                                         unit.nama_unit as unit
@@ -115,16 +168,22 @@
                                       WHERE  
                                         sasaran_kegiatan_id = {$branch_2['sk_id']}
                                       ");
-                          while ($branch_3 = mysqli_fetch_array($ikk)) {
-                          ?>
-                            <tr class="child-row">
-                              <td colspan="2"></td>
-                              <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
-                              <td colspan="2" style="background-color: burlywood;"><?php echo $branch_3['unit'] ?></td>
-                            </tr>
+                            while ($branch_3 = mysqli_fetch_array($ikk)) {
+                            ?>
+                              <tr class="child-row">
+                                <td colspan="2"></td>
+                                <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
+                                <td colspan="2" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
+                                <td class="">
+                                  <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                </td>
+                                <td>
+                                  <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                </td>
+                              </tr>
 
-                            <?php
-                            $iksk = mysqli_query($connection, "SELECT DISTINCT
+                              <?php
+                              $iksk = mysqli_query($connection, "SELECT DISTINCT
                                           indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id as iksk_id, 
                                           isi_indikator_kinerja_sub_kegiatan, 
                                           unit.nama_unit as unit
@@ -135,15 +194,21 @@
                                         WHERE 
                                           indikator_kinerja_kegiatan_id = {$branch_3['ikk_id']}
                                         ");
-                            while ($branch_4 = mysqli_fetch_array($iksk)) {
-                            ?>
-                              <tr class="child-row">
-                                <td colspan="3"></td>
-                                <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
-                                <td colspan="1"><?php echo $branch_4['unit'] ?></td>
-                              </tr>
-                              <?php
-                              $ikuk = mysqli_query($connection, "SELECT DISTINCT
+                              while ($branch_4 = mysqli_fetch_array($iksk)) {
+                              ?>
+                                <tr class="child-row">
+                                  <td colspan="3" style="width: 10px;"></td>
+                                  <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
+                                  <td colspan="1"><?php echo $branch_4['unit'] ?></td>
+                                  <td class="">
+                                    <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                  </td>
+                                  <td>
+                                    <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                  </td>
+                                </tr>
+                                <?php
+                                $ikuk = mysqli_query($connection, "SELECT DISTINCT
                                             indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id, 
                                             kode_ikuk, 
                                             isi_indikator_kinerja_unit_kerja, 
@@ -155,22 +220,29 @@
                                           WHERE 
                                             indikator_kinerja_sub_kegiatan_id = {$branch_4['iksk_id']}
                                         ");
-                              while ($branch_5 = mysqli_fetch_array($ikuk)) {
-                              ?>
-                                <tr class="child-row">
-                                  <td colspan="4"></td>
-                                  <td colspan="1" style="background-color: white;"><?php echo $branch_5['kode_ikuk'] ?></td>
-                                  <td colspan="2" style="background-color: white;"><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
-                                  <td colspan="" style="background-color: white;"><?php echo $branch_5['unit'] ?></td>
-                                </tr>
-                      <?php
+                                while ($branch_5 = mysqli_fetch_array($ikuk)) {
+                                ?>
+                                  <tr class="child-row">
+                                    <td colspan="4"></td>
+                                    <td colspan="1" style="background-color: white; width: 10px; "><?php echo $branch_5['kode_ikuk'] ?></td>
+                                    <td colspan="2" style="background-color: white;width: 24px; "><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
+                                    <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
+                                    <td class="">
+                                      <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                    </td>
+                                    <td>
+                                      <a href="../Controllers//Delete_Data/ikuk.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id'];?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus IKUK :   <?php echo $branch_5['kode_ikuk'] .' => ' . $branch_5['isi_indikator_kinerja_unit_kerja'] ?>')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                    </td>
+                                  </tr>
+                        <?php
+                                }
                               }
                             }
                           }
                         }
-                      }
-                      ?>
-                    </tbody>
+                        ?>
+                      </tbody>
+                    </div>
                   </table>
                 </div>
               </div>

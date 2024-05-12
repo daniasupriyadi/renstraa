@@ -5,6 +5,7 @@
     <title>Tambah Unit/PIC</title>
     <?php
     include '../Layout/head.php';
+    include('../../config.php');
     ?>
 </head>
 
@@ -32,54 +33,192 @@
                         <div class="card">
                             <div class="d-flex flex-row align-items-center back-menu">
                                 <a href="../instrument_renstra.php"><i class='bx bx-left-arrow-alt text-black me-2' style="font-size: 26px;"></i></a>
-                                <span class="" style="font-size: 20px;">Tambah Data - Instrument Rencana Strategis</span>
+                                <span class="me-3" style="font-size: 20px;">Tambah Data - Instrument Rencana Strategis</span>
+
+
                             </div>
+
                             <div class="card-body">
-                            <form action="../../Controllers/Tambah_Data/instrument_renstra.php" method="POST" id="nestedForm">
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <div class="tujuan-container">
-                <div class="tujuan">
-                    <label for="tujuanFormControlInput" class="form-label">Tujuan</label>
-                    <input type="text" class="form-control tujuan-input" name="tujuan[]" placeholder="Masukkan Tujuan....." aria-describedby="defaultFormControlHelp" />
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="sasaran-fields">
-        <!-- Template sasaran -->
-        <div class="sasaran-template" style="display: none;">
-            <div class="row mb-3 align-items-end">
-                <div class="col-md-6">
-                    <div class="sasaran-container">
-                        <label for="sasaranFormControlInput" class="form-label">Isi Sasaran Kegiatan</label>
-                        <input type="text" class="form-control sasaran-input" name="sasaran[]" placeholder="Masukkan Sasaran Kegiatan" aria-describedby="defaultFormControlHelp" />
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="pic-container">
-                        <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
-                        <select class="form-select pic-select" name="pic[]">
-                            <option>PIC/Unit</option>
-                            <option value="1">Wadir</option>
-                            <option value="2">Direktur</option>
-                            <option value="3">Ukarni</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-1">
-                    <button type="button" class="btn btn-danger delete-sasaran">Hapus</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-12">
-            <button type="button" class="btn btn-primary add-sasaran">Tambah Sasaran</button>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Tambah Data</button>
-</form>
+
+                                <form action="../../Controllers/Tambah_Data/instrument_renstra.php" method="POST" id="nestedForm">
+                                    <!-- tujuan -->
+                                    <div class="row mb-3 d-flex align-items-center">
+                                        <div class="col-lg-12">
+                                            <div class="tujuan-container">
+                                                <div class="tujuan">
+                                                    <label for="tujuan" class="form-label">Tujuan</label>
+                                                    <textarea type="text" class="form-control tujuan-input" name="isi_tujuan" id="isi_tujuan" placeholder="Masukkan Tujuan....." aria-describedby="defaultFormControlHelp"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <!-- sasaran kegiatan -->
+                                    <div class="row mb-3 d-flex align-align-items-start justify-content-end">
+                                        <div class="" style="width: 85%;">
+                                            <div class="sasaran-container">
+                                                <label for="sasaran" class="form-label">Isi Sasaran Kegiatan</label>
+                                                <input type="text" class="form-control sasaran-input" name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 13%;">
+                                            <div class="pic-container">
+                                                <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
+                                                <select class="form-select" name="unit_id_sasaran" id="unit_id_sasaran">
+                                                    <option>PIC/Unit</option>
+                                                    <?php
+                                                    $query = mysqli_query($connection, "SELECT unit_id, nama_unit FROM unit ORDER BY unit_id");
+                                                    while ($data = mysqli_fetch_array($query)) {
+                                                    ?>
+                                                        <option value="<?php echo $data['unit_id']; ?>"><?php echo $data['nama_unit']; ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <!-- Indikator Kinerja Kegiatan -->
+                                    <div class="row mb-3 d-flex align-align-items-start justify-content-end">
+                                        <div class="" style="width: 10%;">
+                                            <div class="">
+                                                <label for="" class="form-label">Kode IKK</label>
+                                                <input type="text" class="form-control" name="kode_ikk" id="kode_ikk" placeholder="Kode IKK...." aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 65%;">
+                                            <div class="">
+                                                <label for="indikator_kinerja_kegiatan" class="form-label">Indikator Kinerja Kegiatan</label>
+                                                <input type="text" class="form-control" name="isi_indikator_kinerja_kegiatan" id="isi_indikator_kinerja_kegiatan" placeholder="Masukkan Indikator Kinerja Kegiatan......" aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 10%;">
+                                            <div class="pic-container">
+                                                <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
+                                                <select class="form-select" name="unit_id_ikk" id="unit_id_ikk">
+                                                    <option>PIC/Unit</option>
+                                                    <?php
+                                                    $query = mysqli_query($connection, "SELECT unit_id, nama_unit FROM unit ORDER BY unit_id");
+                                                    while ($data = mysqli_fetch_array($query)) {
+                                                    ?>
+                                                        <option value="<?php echo $data['unit_id']; ?>"><?php echo $data['nama_unit']; ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 10%;">
+                                            <div class="">
+                                                <label for="target" class="form-label">Target IKK</label>
+                                                <input type="number" class="form-control" name="target_ikk" id="target_ikk" placeholder="Target...." aria-describedby="defaultFormControlHelp"></input>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+
+                                    <!-- Indikator Kinerja SUB Kegiatan -->
+                                    <div class="row mb-3 d-flex align-align-items-center justify-content-end">
+                                        <div class="" style="width: 10%;">
+                                            <div class="">
+                                                <label for="" class="form-label">Kode IKSK</label>
+                                                <input type="text" class="form-control" name="kode_iksk" id="kode_iksk" placeholder="Kode IKSK...." aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 45%;">
+                                            <div class="">
+                                                <label for="" class="form-label">Indikator Kinerja Sub Kegiatan</label>
+                                                <input type="text" class="form-control " name="isi_indikator_kinerja_sub_kegiatan" id="isi_indikator_kinerja_sub_kegiatan" placeholder="Masukkan Isi Indikator Kinerja Sub Kegiatan....." aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 10%;">
+                                            <div class="pic-container">
+                                                <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
+                                                <select class="form-select" name="unit_id_iksk" id="unit_id_iksk">
+                                                    <option>PIC/Unit</option>
+                                                    <?php
+                                                    $query = mysqli_query($connection, "SELECT unit_id, nama_unit FROM unit ORDER BY unit_id");
+                                                    while ($data = mysqli_fetch_array($query)) {
+                                                    ?>
+                                                        <option value="<?php echo $data['unit_id']; ?>"><?php echo $data['nama_unit']; ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 10%;">
+                                            <div class="">
+                                                <label for="" class="form-label">Target IKSK</label>
+                                                <input type="number" class="form-control" name="target_iksk" id="target_iksk" placeholder="Target IKSK...." aria-describedby="defaultFormControlHelp"></input>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-end" style="width: 15%;">
+                                            <button type="button" class="btn rounded-pill btn-primary" id="addIKUK">
+                                                <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah IKUK
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                    <hr>
+
+                                    <!-- Indikator Kinerja Unit Kegiatan -->
+                                    <div class="ikuk-fields">
+                                        <div style="margin-left: 12%; margin-top: 12px; margin-bottom: 12px;">
+                                            <span style="font-size: 18px;">Indikator Kinerja Unit Kerja</span>
+                                        </div>
+                                        <div class="ikuk-template">
+                                            <div class="row mb-4 d-flex align-align-items-start justify-content-end">
+
+                                                <div class="" style="width: 10%;">
+                                                    <div class="sasaran-container">
+                                                        <label for="" class="form-label">Kode IKUK</label>
+                                                        <input type="text" class="form-control" name="kode_ikuk[]" id="kode_ikuk" placeholder="Kode IKUK...." aria-describedby="defaultFormControlHelp" />
+                                                    </div>
+                                                </div>
+                                                <div class="" style="width: 55%;">
+                                                    <div class="">
+                                                        <label for="" class="form-label">Indikator Kinerja Unit Kerja</label>
+                                                        <input type="text" class="form-control " name="isi_indikator_kinerja_unit_kerja[]" id="isi_indikator_kinerja_unit_kerja" placeholder="Masukkan Indikator Kinerja Unit Kerja....." aria-describedby="defaultFormControlHelp" />
+                                                    </div>
+                                                </div>
+                                                <div class="" style="width: 10%;">
+                                                    <div class="pic-container">
+                                                        <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
+                                                        <select class="form-select" name="unit_id_ikuk[]" id="unit_id_ikuk">
+                                                            <option>PIC/Unit</option>
+                                                            <?php
+                                                            $query = mysqli_query($connection, "SELECT unit_id, nama_unit FROM unit ORDER BY unit_id");
+                                                            while ($data = mysqli_fetch_array($query)) {
+                                                            ?>
+                                                                <option value="<?php echo $data['unit_id']; ?>"><?php echo $data['nama_unit']; ?></option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="" style="width: 10%;">
+                                                    <div class="">
+                                                        <label for="" class="form-label">Target IKUK</label>
+                                                        <input type="number" class="form-control" name="target_ikuk[]" id="target_ikuk" placeholder="Target IKUK...." aria-describedby="defaultFormControlHelp"></input>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="d-flex justify-content-start">
+                                        <button type="submit" class="btn btn-primary">Tambah Data</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -89,28 +228,19 @@
                 <?php
                 include '../Layout/corejs.php';
                 ?>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const addSasaranBtn = document.querySelector(".add-sasaran");
-        const sasaranFields = document.querySelector(".sasaran-fields");
-        const sasaranTemplate = document.querySelector(".sasaran-template");
-
-        addSasaranBtn.addEventListener("click", function() {
-            const newSasaranField = sasaranTemplate.cloneNode(true);
-            newSasaranField.style.display = "block";
-            sasaranFields.appendChild(newSasaranField);
-        });
-
-        document.addEventListener("click", function(event) {
-            if (event.target.classList.contains("delete-sasaran")) {
-                event.target.closest(".row").remove();
-            }
-        });
-    });
-</script>
-
                 <!-- /Core Js -->
+
+                <!-- script add form -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        document.getElementById('addIKUK').addEventListener('click', function() {
+                            var ikukTemplate = document.querySelector('.ikuk-template').cloneNode(true);
+                            var ikukFields = document.querySelector('.ikuk-fields');
+                            ikukFields.appendChild(ikukTemplate);
+                        });
+
+                    });
+                </script>
 </body>
 
 </html>
