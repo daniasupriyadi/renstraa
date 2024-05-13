@@ -6,6 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isi_tujuan = $_POST["isi_tujuan"];
     $isi_sasaran_kegiatan = $_POST['isi_sasaran_kegiatan'];
     $unit_id_sasaran = $_POST['unit_id_sasaran'];
+    $target_sasaran = $_POST['target_sasaran'];
 
     $kode_ikk = $_POST['kode_ikk'];
     $isi_indikator_kinerja_kegiatan = $_POST['isi_indikator_kinerja_kegiatan'];
@@ -27,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $tujuan_id = $connection->insert_id;
     }
 
-    $insert_sasaran_kegiatan = "INSERT INTO sasaran_kegiatan (tujuan_id,unit_id,isi_sasaran_kegiatan) VALUES ('$tujuan_id', '$unit_id_sasaran', '$isi_sasaran_kegiatan')";
+    $insert_sasaran_kegiatan = "INSERT INTO sasaran_kegiatan (tujuan_id,unit_id,isi_sasaran_kegiatan,target_sasaran) VALUES ('$tujuan_id', '$unit_id_sasaran', '$isi_sasaran_kegiatan','$target_sasaran')";
     if ($connection->query($insert_sasaran_kegiatan) === TRUE) {
         $sasaran_kegiatan_id = $connection->insert_id;
     }

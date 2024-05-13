@@ -56,10 +56,16 @@
 
                                     <!-- sasaran kegiatan -->
                                     <div class="row mb-3 d-flex align-align-items-start justify-content-end">
-                                        <div class="" style="width: 85%;">
+                                        <div class="" style="width: 75%;">
                                             <div class="sasaran-container">
                                                 <label for="sasaran" class="form-label">Isi Sasaran Kegiatan</label>
                                                 <input type="text" class="form-control sasaran-input" name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" />
+                                            </div>
+                                        </div>
+                                        <div class="" style="width: 10%;">
+                                            <div class="sasaran-container">
+                                                <label for="sasaran" class="form-label">Target</label>
+                                                <input type="text" class="form-control sasaran-input" name="target_sasaran" id="target_sasaran" placeholder="Target Sasaran......" aria-describedby="defaultFormControlHelp" />
                                             </div>
                                         </div>
                                         <div class="" style="width: 13%;">

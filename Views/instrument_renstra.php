@@ -28,7 +28,7 @@
     .table-responsive .table-head {
       position: sticky;
       top: 0;
-      background-color: yellow;
+      background-color: #FFC000;
       z-index: 1;
     }
 
@@ -82,7 +82,7 @@
                 </div>
 
                 <div class="table-responsive text-nowrap" style="max-height: 640px;">
-                  <table style="width:100%; background-color: #F8FAFF; border: solid grey 2px; color: black;" class="table table-hover table-bordered">
+                  <table style="width:100%; background-color:#FFFF; border:solid grey 2px; color: black;" class="table table-hover table-bordered">
                     <thead class="table-head" style="height: 48px;">
                       <tr>
                         <th rowspan="2">Tujuan</th>
@@ -91,6 +91,7 @@
                         <th rowspan="2">Indikator Kinerja Sub Kegiatan</th>
                         <th colspan="3">Indikator Kinerja Unit Kerja</th>
                         <th rowspan="3">PIC/Unit</th>
+                        <th rowspan="2" colspan="1">Target</th>
                         <th rowspan="2" colspan="1">Edit</th>
                         <th rowspan="2" colspan="1">Hapus</th>
                       </tr>
@@ -105,7 +106,7 @@
                         <?php
                         include('../config.php');
                         $tujuan = mysqli_query($connection, "SELECT
-                                        DISTINCT(tujuan.tujuan_id), 
+                                        DISTINCT(tujuan.tujuan_id) as tujuan_id, 
                                         isi_tujuan
                                       FROM 
                                         tujuan 
@@ -118,13 +119,14 @@
                         ?>
                           <tr class="parent-row">
                             <td colspan="8" style="background-color: antiquewhite;">
-                              <span class="toggle-row">[+]</span><?php echo $branch_1['isi_tujuan']; ?>
+                              <span class="toggle-row">[+]</span><?php echo $branch_1['tujuan_id'].'. ' . $branch_1['isi_tujuan']; ?>
                             </td>
-                            <td class="">
+                            <td style="background-color: antiquewhite;"></td>
+                            <td style="background-color: antiquewhite;" class="">
                               <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                             </td>
-                            <td>
-                              <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                            <td style="background-color: antiquewhite;">
+                            <a href="../Controllers/Delete_Data/instrument_renstra.php?tujuan_id=<?php echo $branch_1['tujuan_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Tujuan :   <?php echo $branch_1['tujuan_id'] .' => ' . $branch_1['isi_tujuan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                             </td>
                           </tr>
 
@@ -133,7 +135,8 @@
                           $sasaran_kegiatan = mysqli_query($connection, "SELECT DISTINCT
                                                     (sasaran_kegiatan.sasaran_kegiatan_id) as sk_id, 
                                                     (isi_sasaran_kegiatan), 
-                                                    unit.nama_unit as pic
+                                                    unit.nama_unit as pic, 
+                                                    target_sasaran
                                                 FROM 
                                                   sasaran_kegiatan
                                                 INNER JOIN 
@@ -145,13 +148,14 @@
                           ?>
                             <tr class="">
                               <td colspan="1"></td>
-                              <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo $branch_2['isi_sasaran_kegiatan'] ?></td>
+                              <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo ''.$branch_2['sk_id'] .'. '. $branch_2['isi_sasaran_kegiatan'] ?></td>
                               <td colspan="1" style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['pic'] ?></td>
-                              <td class="">
+                              <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['target_sasaran']; ?></td>
+                              <td style="background-color:  rgb(112, 228, 112);" class="">
                                 <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                               </td>
-                              <td>
-                                <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                              <td style="background-color:  rgb(112, 228, 112);">
+                              <a href="../Controllers/Delete_Data/instrument_renstra.php?sasaran_kegiatan_id=<?php echo $branch_2['sk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Kode Sasaran Kegiatan :   <?php echo $branch_2['sk_id'] .' => ' . $branch_2['isi_sasaran_kegiatan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                               </td>
                             </tr>
 
@@ -159,8 +163,10 @@
                             <?php
                             $ikk = mysqli_query($connection, "SELECT DISTINCT
                                         indikator_kinerja_kegiatan.indikator_kinerja_kegiatan_id as ikk_id, 
+                                        indikator_kinerja_kegiatan.kode_ikk as kode_ikk,
                                         isi_indikator_kinerja_kegiatan, 
-                                        unit.nama_unit as unit
+                                        unit.nama_unit as unit, 
+                                        target_ikk
                                       FROM 
                                         indikator_kinerja_kegiatan
                                       LEFT JOIN  
@@ -172,21 +178,24 @@
                             ?>
                               <tr class="child-row">
                                 <td colspan="2"></td>
-                                <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
+                                <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo '['.$branch_3['kode_ikk'].'] '.$branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
                                 <td colspan="2" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
-                                <td class="">
+                                <td style="background-color: burlywood;"><?php echo $branch_3['target_ikk']; ?></td>
+                                <td style="background-color: burlywood;" class="" >
                                   <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                                 </td>
-                                <td>
-                                  <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                <td style="background-color: burlywood;">
+                                <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_kegiatan_id=<?php echo $branch_3['ikk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Kode IKK :   <?php echo $branch_3['kode_ikk'] .' => ' . $branch_3['isi_indikator_kinerja_kegiatan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                                 </td>
                               </tr>
 
                               <?php
                               $iksk = mysqli_query($connection, "SELECT DISTINCT
-                                          indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id as iksk_id, 
+                                          indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id as iksk_id,
+                                          kode_iksk, 
                                           isi_indikator_kinerja_sub_kegiatan, 
-                                          unit.nama_unit as unit
+                                          unit.nama_unit as unit, 
+                                          target_iksk
                                         FROM 
                                           indikator_kinerja_sub_kegiatan
                                         LEFT JOIN 
@@ -198,13 +207,14 @@
                               ?>
                                 <tr class="child-row">
                                   <td colspan="3" style="width: 10px;"></td>
-                                  <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
-                                  <td colspan="1"><?php echo $branch_4['unit'] ?></td>
-                                  <td class="">
+                                  <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo '['.$branch_4['kode_iksk'].'] '. $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
+                                  <td colspan="1"  style="background-color: aquamarine;"><?php echo $branch_4['unit'] ?></td>
+                                  <td  style="background-color: aquamarine;"><?php echo $branch_4['target_iksk']; ?></td>
+                                  <td style="background-color: aquamarine;" class="">
                                     <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                                   </td>
-                                  <td>
-                                    <a href=""><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                  <td style="background-color: aquamarine;">
+                                    <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_sub_kegiatan_id=<?php echo $branch_4['iksk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Kode IKSK :   <?php echo $branch_4['kode_iksk'] .' => ' . $branch_4['isi_indikator_kinerja_sub_kegiatan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                                   </td>
                                 </tr>
                                 <?php
@@ -212,7 +222,8 @@
                                             indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id, 
                                             kode_ikuk, 
                                             isi_indikator_kinerja_unit_kerja, 
-                                            unit.nama_unit as unit
+                                            unit.nama_unit as unit, 
+                                            target_ikuk
                                           FROM 
                                             indikator_kinerja_unit_kerja
                                           LEFT JOIN 
@@ -227,11 +238,12 @@
                                     <td colspan="1" style="background-color: white; width: 10px; "><?php echo $branch_5['kode_ikuk'] ?></td>
                                     <td colspan="2" style="background-color: white;width: 24px; "><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
+                                    <td><?php echo $branch_5['target_ikuk']; ?></td>
                                     <td class="">
                                       <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                                     </td>
                                     <td>
-                                      <a href="../Controllers//Delete_Data/ikuk.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id'];?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus IKUK :   <?php echo $branch_5['kode_ikuk'] .' => ' . $branch_5['isi_indikator_kinerja_unit_kerja'] ?>')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
+                                      <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus IKUK :   <?php echo $branch_5['kode_ikuk'] . ' => ' . $branch_5['isi_indikator_kinerja_unit_kerja'] ?>')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                                     </td>
                                   </tr>
                         <?php

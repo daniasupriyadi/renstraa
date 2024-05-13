@@ -1,3 +1,4 @@
+-- Active: 1713877694562@@127.0.0.1@3306@renstra_ami
 -- Drop Database jika ada 
 DROP DATABASE renstra_ami;
 
@@ -27,10 +28,14 @@ CREATE TABLE sasaran_kegiatan(
 	PRIMARY KEY(sasaran_kegiatan_id),
 	CONSTRAINT FK_TUJUAN 
 		FOREIGN KEY(tujuan_id) 
-		REFERENCES tujuan(tujuan_id), 
+		REFERENCES tujuan(tujuan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE, 
 	CONSTRAINT FK_UNIT_1
 		FOREIGN KEY(unit_id)
 		REFERENCES unit(unit_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 
@@ -44,10 +49,14 @@ CREATE TABLE indikator_kinerja_kegiatan(
 	PRIMARY KEY(indikator_kinerja_kegiatan_id),
 	CONSTRAINT FK_SASARAN_KEGIATAN 
 		FOREIGN KEY(sasaran_kegiatan_id) 
-		REFERENCES sasaran_kegiatan(sasaran_kegiatan_id),
+		REFERENCES sasaran_kegiatan(sasaran_kegiatan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 	CONSTRAINT FK_UNIT_2
 		FOREIGN KEY(unit_id)
 		REFERENCES unit(unit_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE indikator_kinerja_sub_kegiatan(
@@ -60,9 +69,13 @@ CREATE TABLE indikator_kinerja_sub_kegiatan(
 	PRIMARY KEY(indikator_kinerja_sub_kegiatan_id), 
 	CONSTRAINT FK_IKK 
 		FOREIGN KEY(indikator_kinerja_kegiatan_id) 
-		REFERENCES indikator_kinerja_kegiatan(indikator_kinerja_kegiatan_id),
+		REFERENCES indikator_kinerja_kegiatan(indikator_kinerja_kegiatan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 	CONSTRAINT FK_UNIT_3
 		FOREIGN KEY(unit_id) REFERENCES unit(unit_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE indikator_kinerja_unit_kerja(
@@ -75,10 +88,14 @@ CREATE TABLE indikator_kinerja_unit_kerja(
 	PRIMARY KEY(indikator_kinerja_unit_kerja_id), 
 	CONSTRAINT FK_IKSK 
 		FOREIGN KEY(indikator_kinerja_sub_kegiatan_id) 
-		REFERENCES indikator_kinerja_sub_kegiatan(indikator_kinerja_sub_kegiatan_id),
+		REFERENCES indikator_kinerja_sub_kegiatan(indikator_kinerja_sub_kegiatan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 	CONSTRAINT FK_UNIT_4
 		FOREIGN KEY(unit_id)
 		REFERENCES unit(unit_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 -- Data Transaksi ----------------------------------------------------------
@@ -188,6 +205,7 @@ INSERT INTO sasaran_kegiatan (tujuan_id, unit_id, isi_sasaran_kegiatan) VALUES (
 -- Insert Data Master Indikator Kinerja Kegiatan
 INSERT INTO indikator_kinerja_kegiatan (sasaran_kegiatan_id, unit_id, kode_ikk, isi_indikator_kinerja_kegiatan, target_ikk) VALUES (1, NULL, 'IKU 1.1', 'Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi atau menjadi wiraswasta', 55);
 INSERT INTO indikator_kinerja_kegiatan (sasaran_kegiatan_id, unit_id, kode_ikk, isi_indikator_kinerja_kegiatan, target_ikk) VALUES (1, NULL, 'IKU 1.2', ' Persentase mahasiswa S1 dan D4/D3/D2 yang menghabiskan paling sedikit 20 (dua puluh) sks di luar kampus; atau meraih prestasi paling rendah tingkat nasional', 10);
+
 
 -- Insert Data Master Indikator Kinerja Sub Kegiatan
 INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 5, 'iksk 1.1.1', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan', NULL);
