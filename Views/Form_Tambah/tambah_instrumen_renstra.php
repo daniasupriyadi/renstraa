@@ -163,7 +163,7 @@
                                                 <input type="number" class="form-control" name="target_iksk" id="target_iksk" placeholder="Target IKSK...." aria-describedby="defaultFormControlHelp"></input>
                                             </div>
                                         </div>
-                                        <div class="d-flex align-items-end" style="width: 15%;">
+                                    <div class="d-flex align-items-end" style="width: 15%;">
                                             <button type="button" class="btn rounded-pill btn-primary" id="addIKUK">
                                                 <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah IKUK
                                             </button>

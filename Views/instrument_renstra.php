@@ -182,7 +182,7 @@
                                 <td colspan="2" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
                                 <td style="background-color: burlywood;"><?php echo $branch_3['target_ikk']; ?></td>
                                 <td style="background-color: burlywood;" class="" >
-                                  <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                  <a href="Form_Edit/InstrumentRenstra/ikk.php?indikator_kinerja_kegiatan_id=<?php echo $branch_3['ikk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                 </td>
                                 <td style="background-color: burlywood;">
                                 <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_kegiatan_id=<?php echo $branch_3['ikk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Kode IKK :   <?php echo $branch_3['kode_ikk'] .' => ' . $branch_3['isi_indikator_kinerja_kegiatan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
@@ -211,7 +211,7 @@
                                   <td colspan="1"  style="background-color: aquamarine;"><?php echo $branch_4['unit'] ?></td>
                                   <td  style="background-color: aquamarine;"><?php echo $branch_4['target_iksk']; ?></td>
                                   <td style="background-color: aquamarine;" class="">
-                                    <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                  <a href="Form_Edit/InstrumentRenstra/iksk.php?indikator_kinerja_sub_kegiatan_id=<?php echo $branch_4['iksk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                   </td>
                                   <td style="background-color: aquamarine;">
                                     <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_sub_kegiatan_id=<?php echo $branch_4['iksk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Kode IKSK :   <?php echo $branch_4['kode_iksk'] .' => ' . $branch_4['isi_indikator_kinerja_sub_kegiatan'] . ', dan Beserta Dengan Turunannya'?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
@@ -240,7 +240,7 @@
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
                                     <td><?php echo $branch_5['target_ikuk']; ?></td>
                                     <td class="">
-                                      <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
+                                      <a href="Form_Edit/InstrumentRenstra/ikuk.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                     </td>
                                     <td>
                                       <a href="../Controllers/Delete_Data/instrument_renstra.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus IKUK :   <?php echo $branch_5['kode_ikuk'] . ' => ' . $branch_5['isi_indikator_kinerja_unit_kerja'] ?>')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>

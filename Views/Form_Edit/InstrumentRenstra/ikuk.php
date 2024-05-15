@@ -1,5 +1,5 @@
 <?php
-include('../../config.php');
+include('../../../config.php');
 
 if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 
@@ -31,18 +31,18 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 <head>
     <title>Tambah Unit/PIC</title>
     <?php
-    include '../Layout/head.php';
-    include('../../config.php');
+    include ('../../Layout/head.php');
     ?>
 </head>
 
 <body>
+
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu Sidebar-->
             <?php
-            include '../Layout/sidebar.php';
+            include "../../Layout/sidebar.php";
             ?>
             <!-- / Menu Sidebar-->
 
@@ -50,7 +50,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
             <div class="layout-page">
                 <!-- Navbar -->
                 <?php
-                include '../Layout/navbar.php';
+                include '../../Layout/navbar.php';
                 ?>
                 <!-- / Navbar -->
 
@@ -59,14 +59,14 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="card">
                             <div class="d-flex flex-row align-items-center back-menu">
-                                <a href="../instrument_renstra.php"><i class='bx bx-left-arrow-alt text-black me-2' style="font-size: 26px;"></i></a>
+                                <a href="../../instrument_renstra.php"><i class='bx bx-left-arrow-alt text-black me-2' style="font-size: 26px;"></i></a>
                                 <span class="me-3" style="font-size: 20px;">Edit Data - Instrument Indikator Kinerja Unit Kerja</span>
                             </div>
 
                             <div class="card-body">
 
                                 <!-- Form Ikuk -->
-                                <form action="../../Controllers/Update_Data/instrument_renstra.php" method="POST" id="nestedForm">
+                                <form action="../../../Controllers/Update_Data/instrument_renstra.php?indikator_kinerja_unit_kerja_id" method="POST" id="nestedForm">
                                     <!-- Indikator Kinerja Unit Kegiatan -->
                                     <div class="ikuk-fields">
                                         <div class="ikuk-template">
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 
                 <!-- Core JS -->
                 <?php
-                include '../Layout/corejs.php';
+                include '../../Layout/corejs.php';
                 ?>
                 <!-- /Core Js -->
 
