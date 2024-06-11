@@ -1,11 +1,10 @@
--- Active: 1713877694562@@127.0.0.1@3306@renstra_ami
 -- Drop Database jika ada 
-DROP DATABASE renstra_ami;
+DROP DATABASE renstraami;
 
 -- Membuat Database AMI
-CREATE DATABASE renstra_ami;
+CREATE DATABASE renstraami;
 
-USE renstra_ami;
+USE renstraami;
 
 -- Buat Data Master ---------------------------------------------------------
 CREATE TABLE unit(
@@ -25,6 +24,7 @@ CREATE TABLE sasaran_kegiatan(
 	tujuan_id INT NOT NULL,
 	unit_id INT NOT NULL,
 	isi_sasaran_kegiatan LONGTEXT, 
+	target_sasaran INT,
 	PRIMARY KEY(sasaran_kegiatan_id),
 	CONSTRAINT FK_TUJUAN 
 		FOREIGN KEY(tujuan_id) 
@@ -199,47 +199,46 @@ INSERT INTO tujuan(isi_tujuan) VALUES ('Terwujudnya kualitas sumber daya manusia
 INSERT INTO tujuan(isi_tujuan) VALUES ('Meningkatnya kualitas dosen pendidikan tinggi');
 
 -- Insert Data Master Sasaran Kegiatan
-INSERT INTO sasaran_kegiatan (tujuan_id, unit_id, isi_sasaran_kegiatan) VALUES (1, 1, 'Meningkatnya kualitas lulusan pendidikan tinggi');
-INSERT INTO sasaran_kegiatan (tujuan_id, unit_id, isi_sasaran_kegiatan) VALUES (1, 1, 'Meningkatnya kualitas dosen pendidikan tinggi');
+INSERT INTO sasaran_kegiatan (tujuan_id, unit_id, isi_sasaran_kegiatan,target_sasaran) VALUES (1, 1, 'Meningkatnya kualitas lulusan pendidikan tinggi',100);
+-- INSERT INTO sasaran_kegiatan (tujuan_id, unit_id, isi_sasaran_kegiatan) VALUES (1, 1, 'Meningkatnya kualitas dosen pendidikan tinggi');
 
 -- Insert Data Master Indikator Kinerja Kegiatan
 INSERT INTO indikator_kinerja_kegiatan (sasaran_kegiatan_id, unit_id, kode_ikk, isi_indikator_kinerja_kegiatan, target_ikk) VALUES (1, NULL, 'IKU 1.1', 'Persentase lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan; melanjutkan studi atau menjadi wiraswasta', 55);
-INSERT INTO indikator_kinerja_kegiatan (sasaran_kegiatan_id, unit_id, kode_ikk, isi_indikator_kinerja_kegiatan, target_ikk) VALUES (1, NULL, 'IKU 1.2', ' Persentase mahasiswa S1 dan D4/D3/D2 yang menghabiskan paling sedikit 20 (dua puluh) sks di luar kampus; atau meraih prestasi paling rendah tingkat nasional', 10);
+-- INSERT INTO indikator_kinerja_kegiatan (sasaran_kegiatan_id, unit_id, kode_ikk, isi_indikator_kinerja_kegiatan, target_ikk) VALUES (1, NULL, 'IKU 1.2', ' Persentase mahasiswa S1 dan D4/D3/D2 yang menghabiskan paling sedikit 20 (dua puluh) sks di luar kampus; atau meraih prestasi paling rendah tingkat nasional', 10);
 
 
 -- Insert Data Master Indikator Kinerja Sub Kegiatan
-INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 5, 'iksk 1.1.1', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan', NULL);
-INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 2, 'iksk 1.1.2', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil melanjutkan studi', NULL);
-INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 5, 'iksk 1.1.3', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil menjadi wirausaha', NULL);
-
-INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (2, 2, 'iksk 1.2.1', 'Jumlah mahasiswa S1 dan D4/D3/D2 yang menghabiskan hingga 20 (dua puluh) sks di luar kampus', NULL);
-INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (2, 4, 'iksk 1.2.2', 'Jumlah mahasiswa S1 dan D4/D3/D2 yang meraih prestasi paling rendah tingkat nasional', NULL);
+INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 5, 'iksk 1.1.1', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil mendapat pekerjaan', 80);
+INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 2, 'iksk 1.1.2', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil melanjutkan studi', 90);
+INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (1, 5, 'iksk 1.1.3', 'Jumlah lulusan S1 dan D4/D3/D2 yang berhasil menjadi wirausaha', 100);
+-- 
+-- INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (2, 2, 'iksk 1.2.1', 'Jumlah mahasiswa S1 dan D4/D3/D2 yang menghabiskan hingga 20 (dua puluh) sks di luar kampus', NULL);
+-- INSERT INTO indikator_kinerja_sub_kegiatan (indikator_kinerja_kegiatan_id, unit_id, kode_iksk, isi_indikator_kinerja_sub_kegiatan, target_iksk) VALUES (2, 4, 'iksk 1.2.2', 'Jumlah mahasiswa S1 dan D4/D3/D2 yang meraih prestasi paling rendah tingkat nasional', NULL);
 
 -- Insert Data Master Indikator Kinerja Unit Kerja
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.1', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.2', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama  dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≥ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.3', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji   ≤ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.4', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama  dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≤  1.2 x UMP', NULL);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.1', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP', 80);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.2', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama  dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≥ 1.2 x UMP', 100);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.3', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama dengan waktu tunggu ≤ 6 bulan dan bergaji   ≤ 1.2 x UMP', 100);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (1, 8, 'U11.4', 'Jumlah lulusan prodi yang mendapatkan pekerjaan pertama  dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≤  1.2 x UMP', 100);
 INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (2, 6, 'U11.5', 'Jumlah lulusan prodi yang melanjutkan studi ke jenjang berikutnya', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.6', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.7', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≥ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.8', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu ≤ 6 bulan dan bergaji   ≤ 1.2 x UMP', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.9', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≤  1.2 x UMP', NULL);
-
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.1', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan pembelajaran di luar program studi sebesar 20 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.2', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan pembelajaran di luar program studi sebesar 10 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.3', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan magang wajib di luar program studi sebesar 20 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.4', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan magang wajib di luar program studi sebesar 10 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.5', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 20 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.6', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 10 SKS', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.7', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 10 SKS', NULL);
-
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.8', 'Jumlah mahasiswa berprestasi juara 1 bidang akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.9', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.10', 'Jumlah mahasiswa berprestasi juara 2 bidang akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.11', 'Jumlah mahasiswa berprestasi juara 2 bidang non akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.12', 'Jumlah mahasiswa berprestasi juara 3  bidang akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.13', 'Jumlah mahasiswa berprestasi juara 3 bidang non akademik tingkat internasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.14', 'Jumlah mahasiswa berprestasi juara 1  bidang akademik tingkat nasional', NULL);
-INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
-
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.6', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu ≤ 6 bulan dan bergaji ≥ 1.2 x UMP', 80);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.7', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≥ 1.2 x UMP', 80);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.8', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu ≤ 6 bulan dan bergaji   ≤ 1.2 x UMP', 80);
+INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (3, 8, 'U11.9', 'Jumlah lulusan prodi yang berwirausaha berijin dengan waktu tunggu antara 6 sd 12 bulan dan bergaji ≤  1.2 x UMP', 80);
+-- 
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.1', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan pembelajaran di luar program studi sebesar 20 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.2', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan pembelajaran di luar program studi sebesar 10 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.3', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan magang wajib di luar program studi sebesar 20 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.4', 'Jumlah mahasiswa D4/D3 yang menjalankan kegiatan magang wajib di luar program studi sebesar 10 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.5', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 20 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.6', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 10 SKS', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (4, 6, 'U12.7', 'Jumlah mahasiswa inbound D4/D3 yang diterima dalam program pertukaran mahasiswa sebesar 10 SKS', NULL);
+-- 
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.8', 'Jumlah mahasiswa berprestasi juara 1 bidang akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.9', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.10', 'Jumlah mahasiswa berprestasi juara 2 bidang akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.11', 'Jumlah mahasiswa berprestasi juara 2 bidang non akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.12', 'Jumlah mahasiswa berprestasi juara 3  bidang akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.13', 'Jumlah mahasiswa berprestasi juara 3 bidang non akademik tingkat internasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.14', 'Jumlah mahasiswa berprestasi juara 1  bidang akademik tingkat nasional', NULL);
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);

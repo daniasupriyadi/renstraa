@@ -4,7 +4,7 @@
 SHOW DATABASES;
 
 -- UNTUK Memilih Database Yang Akan Digunakan => USE nama_database
-USE renstra_ami;
+USE renstraami;
 
 -- Tampil Data Unit 
 SELECT unit_id, nama_unit
