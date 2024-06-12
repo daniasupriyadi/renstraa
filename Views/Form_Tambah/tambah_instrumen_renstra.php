@@ -42,12 +42,26 @@
 
                                 <form action="../../Controllers/Tambah_Data/instrument_renstra.php" method="POST" id="nestedForm">
                                     <!-- tujuan -->
+                                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
                                     <div class="row mb-3 d-flex align-items-center">
                                         <div class="col-lg-12">
                                             <div class="tujuan-container">
                                                 <div class="tujuan">
                                                     <label for="tujuan" class="form-label">Tujuan</label>
-                                                    <textarea type="text" class="form-control tujuan-input" name="isi_tujuan" id="isi_tujuan" placeholder="Masukkan Tujuan....." aria-describedby="defaultFormControlHelp"></textarea>
+                                                    <select class="form-select tujuan-input" name="isi_tujuan" id="isi_tujuan" aria-describedby="defaultFormControlHelp">
+                                                        <option value="">Pilih Tujuan</option>
+                                                        <?php
+                                                        $sql = "SELECT * FROM tujuan";
+                                                        $tujuan_result = mysqli_query($connection, $sql);
+                                                        if ($tujuan_result->num_rows > 0) {
+                                                            while ($row = $tujuan_result->fetch_assoc()) {
+                                                                echo '<option value="' . $row['tujuan_id'] . '">' . $row['isi_tujuan'] . '</option>';
+                                                            }
+                                                        } else {
+                                                            echo '<option value="">Tujuan tidak tersedia</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -58,13 +72,15 @@
                                     <div class="row mb-3 d-flex align-align-items-start justify-content-end">
                                         <div class="" style="width: 75%;">
                                             <div class="sasaran-container">
-                                                <label for="sasaran" class="form-label">Isi Sasaran Kegiatan</label>
-                                                <input type="text" class="form-control sasaran-input" name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" />
+                                                <label for="sasaran" class="form-label">Sasaran Kegiatan</label>
+                                                <select class="form-select sasaran-input" name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" aria-describedby="defaultFormControlHelp">
+                                                    <option value="">Pilih Sasaran Kegiatan</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="" style="width: 10%;">
                                             <div class="sasaran-container">
-                                                <label for="sasaran" class="form-label">Target</label>
+                                                <label for="target_sasaran" class="form-label">Target</label>
                                                 <input type="text" class="form-control sasaran-input" name="target_sasaran" id="target_sasaran" placeholder="Target Sasaran......" aria-describedby="defaultFormControlHelp" />
                                             </div>
                                         </div>
@@ -86,6 +102,28 @@
                                         </div>
                                     </div>
                                     <hr>
+
+                                    <script>
+                                        $(document).ready(function() {
+                                            $('#isi_tujuan').on('change', function() {
+                                                var tujuan_id = $(this).val();
+                                                console.log(tujuan_id);
+                                                if (tujuan_id) {
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: 'get_sasaran.php', // The PHP file created to fetch sasaran
+                                                        data: 'tujuan_id=' + tujuan_id,
+                                                        success: function(response) {
+                                                            console.log(response);
+                                                            $('#isi_sasaran_kegiatan').html(response);
+                                                        }
+                                                    });
+                                                } else {
+                                                    $('#isi_sasaran_kegiatan').html('<option value="">Pilih Sasaran Kegiatan</option>');
+                                                }
+                                            });
+                                        });
+                                    </script>
 
                                     <!-- Indikator Kinerja Kegiatan -->
                                     <div class="row mb-3 d-flex align-align-items-start justify-content-end">
@@ -163,7 +201,7 @@
                                                 <input type="number" class="form-control" name="target_iksk" id="target_iksk" placeholder="Target IKSK...." aria-describedby="defaultFormControlHelp"></input>
                                             </div>
                                         </div>
-                                    <div class="d-flex align-items-end" style="width: 15%;">
+                                        <div class="d-flex align-items-end" style="width: 15%;">
                                             <button type="button" class="btn rounded-pill btn-primary" id="addIKUK">
                                                 <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah IKUK
                                             </button>
@@ -247,6 +285,8 @@
 
                     });
                 </script>
+
+
 </body>
 
 </html>

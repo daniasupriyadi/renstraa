@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 -- Drop Database  
 DROP DATABASE renstra_ami;
+=======
+-- Drop Database jika ada 
+DROP DATABASE renstraami;
+>>>>>>> c6efee1e49c50da7622374cb7380c345d073e27e
 
 -- Membuat Database AMI
-CREATE DATABASE renstra_ami;
+CREATE DATABASE renstraami;
 
-USE renstra_ami;
+USE renstraami;
 
 -- Buat Data Master ---------------------------------------------------------
 CREATE TABLE unit(
@@ -241,5 +246,9 @@ INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, uni
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.12', 'Jumlah mahasiswa berprestasi juara 3  bidang akademik tingkat internasional', NULL);
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.13', 'Jumlah mahasiswa berprestasi juara 3 bidang non akademik tingkat internasional', NULL);
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.14', 'Jumlah mahasiswa berprestasi juara 1  bidang akademik tingkat nasional', NULL);
+<<<<<<< HEAD
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
 
+=======
+-- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
+>>>>>>> c6efee1e49c50da7622374cb7380c345d073e27e

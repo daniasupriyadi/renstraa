@@ -1,10 +1,10 @@
 <?php
 // Koneksi db
 
-$dbHost = 'localhost';
-$dbName = 'renstra_ami';
+$dbHost = 'localhost:3308';
+$dbName = 'renstraami';
 $dbUsername = 'root';
-$dbPassword = 'Okokokdalll1';
+$dbPassword = '';
 
 $connection = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 
@@ -13,4 +13,4 @@ $connection = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 // } else {
 //     echo "Koneksi Gagal". mysqli_connect_error();
 // }
-// ?> 
+?> 

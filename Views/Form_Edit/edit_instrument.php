@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                 <div class="" style="width: 15%;">
                                                     <div class="">
                                                         <label for="" class="form-label">Target IKUK</label>
-                                                        <input type="number" class="form-control" name="target_ikuk" id="target_ikuk" placeholder="Target IKUK...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_ikuk['target_ikuk'] ?>"></input>
+                                                        <input type="number" class="form-control" name="target_ikuk" id="target_ikuk" placeholder="Target IKUK...."    aria-describedby="defaultFormControlHelp" value="<?php echo $data_ikuk['target_ikuk'] ?>"></input>
                                                     </div>
                                                 </div>
 
