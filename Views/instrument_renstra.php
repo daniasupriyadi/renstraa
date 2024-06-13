@@ -92,6 +92,7 @@
                         <th colspan="3">Indikator Kinerja Unit Kerja</th>
                         <th rowspan="3">PIC/Unit</th>
                         <th rowspan="2" colspan="1">Target</th>
+                        <th rowspan="2" colspan="1">Realisasi</th>
                         <th rowspan="2" colspan="1">Edit</th>
                         <th rowspan="2" colspan="1">Hapus</th>
                       </tr>
