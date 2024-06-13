@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                 <div class="" style="width: 50%;">
                                                     <div class="">
                                                         <label for= "" class="form-label">Sasaran Kegiatan</label>
-                                                        <textarea type="text" class="form-control " name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" value=""><?php echo $data_sasaran['sasaran']; ?></textarea>
+                                                        <textarea type="text" class="form-control " name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" value="" autofocus><?php echo $data_sasaran['sasaran']; ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="" style="width: 15%;">
@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                 <div class="" style="width: 15%;">
                                                     <div class="">
                                                         <label for="" class="form-label">Target Sasaran</label>
-                                                        <input type="number" class="form-control" name="target_sasaran" id="target_sasaran" placeholder="Target Sasaran...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_sasaran['target_sasaran'] ?>"></input>
+                                                        <input type="number" class="form-control" name="target_sasaran" id="target_sasaran" placeholder="Target Sasaran...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_sasaran['target_sasaran'] ?>" autofocus></input>
                                                     </div>
                                                 </div>
 

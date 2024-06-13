@@ -88,7 +88,7 @@ function isPageActive($pageName)
             <div data-i18n="Without menu">Daftar Unit</div>
           </a>
         </li>
-        <li class="menu-item <?php echo isPageActive(['instrument_tujuan_sasaran.php', 'tambah_instrument_tujuan_sasaran.php', 'tujuan_sasaran.php', 'sasaran.php']) ?>">
+        <li class="menu-item <?php echo isPageActive(['instrument_tujuan_sasaran.php', 'tambah_instrument_tujuan_sasaran.php', 'tujuan_sasaran.php', 'sasaran.php', 'tujuan.php']) ?>">
           <a href="<?php echo $base_url ?>/Views/instrument_tujuan_sasaran.php" class="menu-link">
             <div data-i18n="Without navbar">Instrument Tujuan Sasaran</div>
           </a>

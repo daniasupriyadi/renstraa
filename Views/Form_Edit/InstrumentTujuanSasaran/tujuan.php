@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
         $tujuan_id = $_GET['tujuan_id'];
         $query_tujuan = "SELECT 
                         tujuan_id,
-                        isi_tujuan, 
+                        isi_tujuan
                     FROM    
                         tujuan
                     WHERE 
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                             <div class="card-body">
 
                                 <!-- Form Ikuk -->
-                                <form action="../../../Controllers/Update_Data/InstrumentTujuanSasaran.php?tujuan_id" method="POST" id="nestedForm">
+                                <form action="../../../Controllers/Update_Data/instrument_tujuan_sasaran.php?tujuan_id" method="POST" id="nestedForm">
 
                                     <!-- Indikator Kinerja SUB Kegiatan -->
                                     <div class="ikuk-fields">
@@ -84,16 +84,16 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                 <!-- id ikuk -->
                                                 <input type="hidden" class="form-control" name="tujuan_id" id="tujuan_id" placeholder="Masukkan Tujuan...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_tujuan['tujuan_id'] ?>" />
                                                 <!-- id ikuk -->
-                                                <div class="" style="width: 20%;">
+                                                <div class="" style="">
                                                     <div class="sasaran-container">
-                                                        <label for="" class="form-label">Tujuan ID</label>
-                                                        <input type="text" class="form-control" colspan="2" name="tujuan_id" id="tujuan_id" placeholder="Tujuan ID...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_tujuan['tujuan_id']; ?>" disabled />
+                                                        <!-- <label for="" class="form-label">Tujuan ID</label> -->
+                                                        <input type="hidden" class="form-control" colspan="2" name="tujuan_id" id="tujuan_id" placeholder="Tujuan ID...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_tujuan['tujuan_id']; ?>" disabled />
                                                     </div>
                                                 </div>
-                                                <div class="" style="width: 50%;">
+                                                <div class="" style="width: 100%;">
                                                     <div class="">
-                                                        <label for="" class="form-label">Isi Tujuan</label>
-                                                        <textarea type="text" class="form-control " name="isi_tujuan" id="isi_tujuan" placeholder="Masukkan Isi Tujuan....." aria-describedby="defaultFormControlHelp" value=""><?php echo $data_tujuan['isi_tujuan'] ?></textarea>
+                                                        <label for="" class="form-label">Edit Isi Tujuan</label>
+                                                        <textarea type="text" class="form-control " name="isi_tujuan" id="isi_tujuan" placeholder="Masukkan Isi Tujuan....." aria-describedby="defaultFormControlHelp" value="" autofocus><?php echo $data_tujuan['isi_tujuan']?></textarea>
                                                     </div>
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                     <!-- id ikuk -->
                                                     <input type="hidden" class="form-control" name="sasaran_kegiatan_id" id="sasaran_kegiatan_id" placeholder="Masukkan ID Sasaran Kegiatan...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_sasaran['sasaran_kegiatan_id']; ?>" />
                                                     <!-- id ikuk -->
-                                                    <div class="" style="width: 50%;">
+                                                    <div class="" style="width: 80%;">
                                                         <div class="">
                                                             <label for="" class="form-label">Isi Sasaran Kegiatan</label>
                                                             <input type="text" class="form-control " name="isi_sasaran_kegiatan" id="isi_sasaran_kegiatan" placeholder="Masukkan Sasaran Kegiatan....." aria-describedby="defaultFormControlHelp" value="<?php echo $data_sasaran['isi_sasaran_kegiatan']; ?>" disabled>
