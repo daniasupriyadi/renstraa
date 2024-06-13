@@ -1,10 +1,18 @@
 <?php
 // Koneksi db
 
-$dbHost = 'localhost:3308';
-$dbName = 'renstraami';
+// ini database localhost
+$dbHost = 'localhost:3306';
+$dbName = 'renstra_ami';
 $dbUsername = 'root';
-$dbPassword = '';
+$dbPassword = 'Okokokdalll1';
+
+// ini database server
+// $dbHost = 'kanade.kawaiihost.net';
+// $dbName = 'qtsdwmbb_renstra_ami';
+// $dbUsername = 'qtsdwmbb_dania';
+// $dbPassword = 'daniasupriyadi';
+
 
 $connection = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
 

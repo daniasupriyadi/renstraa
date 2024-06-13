@@ -88,7 +88,12 @@ function isPageActive($pageName)
             <div data-i18n="Without menu">Daftar Unit</div>
           </a>
         </li>
-        <li class="menu-item <?php echo isPageActive(['instrument_renstra.php', 'tambah_instrumen_renstra.php', 'ikuk.php', 'iksk.php']) ?>">
+        <li class="menu-item <?php echo isPageActive(['instrument_tujuan_sasaran.php', 'tambah_instrument_tujuan_sasaran.php', 'tujuan_sasaran.php', 'sasaran.php']) ?>">
+          <a href="<?php echo $base_url ?>/Views/instrument_tujuan_sasaran.php" class="menu-link">
+            <div data-i18n="Without navbar">Instrument Tujuan Sasaran</div>
+          </a>
+        </li>
+        <li class="menu-item <?php echo isPageActive(['instrument_renstra.php', 'tambah_instrumen_renstra.php','ikk.php', 'ikuk.php', 'iksk.php']) ?>">
           <a href="<?php echo $base_url ?>/Views/instrument_renstra.php" class="menu-link">
             <div data-i18n="Without navbar">Instrument Renstra</div>
           </a>

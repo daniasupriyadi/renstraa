@@ -112,6 +112,8 @@
                                         tujuan 
                                       INNER JOIN 
                                         sasaran_kegiatan ON tujuan.tujuan_id = sasaran_kegiatan.tujuan_id
+                                      INNER JOIN 
+                                        indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
                                       ORDER BY 
                                         tujuan.tujuan_id
                                     ");
@@ -141,6 +143,8 @@
                                                   sasaran_kegiatan
                                                 INNER JOIN 
                                                   unit ON unit.unit_id = sasaran_kegiatan.unit_id
+                                                 INNER JOIN 
+                                                  indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
                                                 WHERE 
                                                   tujuan_id = {$branch_1['tujuan_id']}
                                                 ");

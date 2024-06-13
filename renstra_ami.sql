@@ -1,6 +1,3 @@
-<<<<<<< HEAD
--- Drop Database  
-DROP DATABASE renstra_ami;
 =======
 -- Drop Database jika ada 
 DROP DATABASE renstraami;
