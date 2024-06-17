@@ -1,6 +1,14 @@
 <?php
-include('../../../config.php');
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
 
+<?php
+include('../../../config.php');
+// new
 if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 
     if (isset($_GET['indikator_kinerja_sub_kegiatan_id'])) {

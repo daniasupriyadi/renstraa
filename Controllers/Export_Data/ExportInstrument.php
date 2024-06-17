@@ -3,7 +3,7 @@ include('../../config.php');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
-// Fungsi tampil data
+// Fungsi tampil data ok
 
 // Membaca konten HTML untuk konversi ke PDF
 $html = '

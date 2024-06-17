@@ -1,3 +1,5 @@
+
+
 <!-- Membuat Relatif Path untuk mengarahkan ke folder root -->
 <?php
 include 'base_url.php';
@@ -33,8 +35,8 @@ include 'base_url.php';
               <img src="<?php echo $base_url ?>/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
             </div>
             <div class="flex-grow-1 me-3">
-              <span class="fw-semibold d-block">John Doe</span>
-              <small class="text-muted">PJM</small>
+              <span class="fw-semibold d-block"><?php echo $_SESSION['nama']; ?></span>
+              <small class="text-muted"><?php echo $_SESSION['nama_unit']; ?></small>
             </div>
             <div>
               <i class='bx  bx-chevron-down'></i>

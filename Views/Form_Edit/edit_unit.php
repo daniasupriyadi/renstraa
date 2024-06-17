@@ -1,6 +1,15 @@
 <?php
-include('../../config.php');
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
 
+
+<?php
+include('../../config.php');
+// new
 $unit_id = $_GET['unit_id'];
 $query = "SELECT unit_id, nama_unit FROM unit WHERE unit_id = $unit_id";
 $hasil = mysqli_query($connection, $query);

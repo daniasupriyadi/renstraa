@@ -3,7 +3,7 @@ include('../../config.php');
 require '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
-// Fungsi tampil data
+// Fungsi tampil data ok
 $no = 1;
 $query = mysqli_query($connection, "SELECT unit_id, nama_unit FROM unit ORDER BY unit_id");
 

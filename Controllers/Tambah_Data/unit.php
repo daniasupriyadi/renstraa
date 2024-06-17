@@ -1,15 +1,19 @@
 <?php
 session_start();
-include ('../../config.php');
+include ('../../config.php'); // new
 
 $nama_unit = $_POST['nama_unit'];
 $query = "INSERT INTO unit(nama_unit) VALUES ('$nama_unit')";
 
 if($connection->query($query)) {
-    $_SESSION['success_message'] = "Data Berhasil Disimpan";
-    header("location: ../../Views/daftar_unit.php?success=1");
+    $_SESSION['message'] = 'Data Unit Berhasil Ditambahkan !!!';
+    $_SESSION['message_type'] = 'success';
+    header("location: ../../Views/daftar_unit.php");
     exit();
 } else {
-    echo "Data gagal disimpan";
+    $_SESSION['message'] = 'Terjadi kesalahan: ' . mysqli_error($connection);
+    $_SESSION['message_type'] = 'error';
+    header("location: ../../Views/daftar_unit.php");
+    exit();
 }
 ?>

@@ -1,7 +1,8 @@
 <?php
+session_start();
 include('../../config.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
 
     if (isset($_GET['tujuan_id'])) {
         $tujuan_id = $_POST['tujuan_id'];
@@ -15,9 +16,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ";
 
         if ($connection->query($update_tujuan)) {
-            header('location: ../../Views/instrument_tujuan_sasaran.php');
+            $_SESSION['message'] = 'Data Instrument Tujuan Sasaran Berhasil Diperbarui !!!';
+            $_SESSION['message_type'] = 'success';
+            header("location: ../../Views/instrument_tujuan_sasaran.php");
+            exit();
         } else {
-            echo "Data Gagal di update";
+            $_SESSION['message'] = 'Terjadi kesalahan: ' . mysqli_error($connection);
+            $_SESSION['message_type'] = 'error';
+            header("location: ../../Views/instrument_tujuan_sasaran.php");
+            exit();
         }
     } elseif (isset($_GET['sasaran_kegiatan_id'])) {
         $sasaran_kegiatan_id = $_POST['sasaran_kegiatan_id'];
@@ -36,9 +43,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         ";
 
         if ($connection->query($update_sasaran)) {
-            header('location: ../../Views/instrument_tujuan_sasaran.php');
+            $_SESSION['message'] = 'Data Instrument Tujuan Sasaran Berhasil Diperbarui !!!';
+            $_SESSION['message_type'] = 'success';
+            header("location: ../../Views/instrument_tujuan_sasaran.php");
+            exit();
         } else {
-            echo "Data Gagal di update";
+            $_SESSION['message'] = 'Terjadi kesalahan: ' . mysqli_error($connection);
+            $_SESSION['message_type'] = 'error';
+            header("location: ../../Views/instrument_tujuan_sasaran.php");
+            exit();
         }
     }
 }

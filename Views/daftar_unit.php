@@ -1,12 +1,8 @@
 <?php
-session_start(); // Mulai session
-
-// Cek apakah ada pesan sukses dalam session saat halaman dimuat
-if (isset($_SESSION['success_message'])) {
-  // Simpan pesan sukses dalam variabel JavaScript
-  $success_message = $_SESSION['success_message'];
-  // Hapus pesan sukses dari session agar tidak ditampilkan lagi saat refresh halaman
-  unset($_SESSION['success_message']);
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
 }
 ?>
 
@@ -47,15 +43,30 @@ if (isset($_SESSION['success_message'])) {
             <div class="card">
               <h3 class="card-header">Daftar Tabel Unit</h3>
               <div class="card-body">
-                <div class="d-flex flex-row mb-4 demo-inline-spacing">
-                  <a type="button" class="btn btn-primary text-white" href="Form_Tambah/tambah_unit.php">
-                    <span class="tf-icons bx bx-plus text-white"></span>&nbsp;Tambah Data
-                  </a>
-                  <a type="button" href="../Controllers/Export_Data/ExportUnit.php" class="btn btn-primary text-white">
-                    <span class="tf-icons bx bx-download text-white"></span>&nbsp;Unduh .pdf
-                  </a>
+                <div class="d-flex flex-row justify-content-between mb-4 demo-inline-spacing">
+                  <div>
+                    <a type="button" class="btn btn-primary text-white" href="Form_Tambah/tambah_unit.php">
+                      <span class="tf-icons bx bx-plus text-white"></span>&nbsp;Tambah Data
+                    </a>
+                    <a type="button" href="../Controllers/Export_Data/ExportUnit.php" class="btn btn-primary text-white">
+                      <span class="tf-icons bx bx-download text-white"></span>&nbsp;Unduh .pdf
+                    </a>
+                  </div>
 
-
+                  <!-- Success Message -->
+                  <?php
+                  if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+                    $message_type = isset($_SESSION['message_type']) && $_SESSION['message_type'] == 'success' ? 'alert-primary' : 'alert-danger';
+                  ?>
+                    <div id="flash-message" class="alert <?= $message_type ?>" role="alert">
+                      <?= $_SESSION['message'] ?>
+                    </div>
+                  <?php
+                    unset($_SESSION['message']);
+                    unset($_SESSION['message_type']);
+                  }
+                  ?>
+                  <!-- End Success Message -->
                 </div>
                 <div class="table-responsive text-nowrap">
                   <table id="table" class="table table-hover">

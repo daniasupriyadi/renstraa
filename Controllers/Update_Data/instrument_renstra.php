@@ -1,7 +1,7 @@
 <?php
 include('../../config.php');
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
 
     if(isset($_GET['indikator_kinerja_kegiatan_id'])){
         $ikk_id = $_POST['ikk_id'];

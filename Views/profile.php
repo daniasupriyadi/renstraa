@@ -1,5 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
+<!-- new -->
 
 <head>
   <title>Profile</title>
@@ -36,8 +46,8 @@
                   <div class="card mb-4 mb-xl-0">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
                       <img src="<?php echo $base_url ?>/assets/img/avatars/1.png" alt="Profile" class="rounded-circle mb-4">
-                      <h4>John Doe</h4>
-                      <h6>PJM</h6>
+                      <h4><?php echo $_SESSION['nama']; ?></h4>
+                      <h6><?php echo $_SESSION['nama_unit']; ?></h6>
                     </div>
                   </div>
                 </div>
@@ -62,17 +72,17 @@
 
                           <div class="row mt-2">
                             <div class="col-lg-3 col-md-4 label ">Nama Lengkap</div>
-                            <div class="col-lg-9 col-md-8">John Doe</div>
+                            <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nama']; ?></div>
                           </div>
 
                           <div class="row mt-2">
                             <div class="col-lg-3 col-md-4 label ">NIP</div>
-                            <div class="col-lg-9 col-md-8">197610012001121001</div>
+                            <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nip']; ?></div>
                           </div>
 
                           <div class="row mt-2">
                             <div class="col-lg-3 col-md-4 label">Email</div>
-                            <div class="col-lg-9 col-md-8">john@pens.ac.id</div>
+                            <div class="col-lg-9 col-md-8"><?php echo $_SESSION['email']; ?></div>
                           </div>
 
                           <div class="row mt-2">
@@ -82,11 +92,7 @@
 
                           <div class="row mt-2">
                             <div class="col-lg-3 col-md-4 label">Unit / PIC</div>
-                            <div class="col-lg-9 col-md-8">PJM</div>
-                          </div>
-                          <div class="row mt-2">
-                            <div class="col-lg-3 col-md-4 label">Phone</div>
-                            <div class="col-lg-9 col-md-8">(0821)-486-353</div>
+                            <div class="col-lg-9 col-md-8"><?php echo $_SESSION['nama_unit']; ?></div>
                           </div>
 
                         </div>

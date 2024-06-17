@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../config.php');
+include('../../config.php'); // new
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isi_tujuan = $_POST["isi_tujuan"];
@@ -33,10 +33,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
         if ($connection->query($insert_sasaran_kegiatan) === TRUE) {
-            $_SESSION['success_message'] = "Data Instrument Renstra Berhasil Disimpan";
+            $_SESSION['message'] = 'Data Instrument Tujuan Sasaran Berhasil Ditambahkan !!!';
+            $_SESSION['message_type'] = 'success';
             header("location: ../../Views/instrument_tujuan_sasaran.php");
+            exit();
         }
     }
 } else {
-    echo "Error: " . $sql_tujuan . "<br>" . $connection->error;
+    $_SESSION['message'] = 'Terjadi kesalahan: ' . mysqli_error($connection);
+    $_SESSION['message_type'] = 'error';
+    header("location: ../../Views/instrument_tujuan_sasaran.php");
+    exit();
 }

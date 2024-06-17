@@ -1,6 +1,14 @@
+<?php
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" branch_1-theme="theme-default" branch_1-assets-path="../assets/" branch_1-template="vertical-menu-template-free">
-
+<!-- new -->
 <head>
   <title>Instrument Renstra</title>
   <?php
@@ -121,10 +129,10 @@
                         while ($branch_1 = mysqli_fetch_array($tujuan)) {
                         ?>
                           <tr class="parent-row">
-                            <td colspan="8" style="background-color: antiquewhite;">
+                            <td colspan="10" style="background-color: antiquewhite;">
                               <span class="toggle-row">[+]</span><?php echo $branch_1['tujuan_id'] . '. ' . $branch_1['isi_tujuan']; ?>
                             </td>
-                            <td style="background-color: antiquewhite;"></td>
+                            <!-- <td style="background-color: antiquewhite;"></td> -->
                             <td style="background-color: antiquewhite;" class="">
                               <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                             </td>
@@ -156,6 +164,7 @@
                               <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo '' . $branch_2['sk_id'] . '. ' . $branch_2['isi_sasaran_kegiatan'] ?></td>
                               <td colspan="1" style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['pic'] ?></td>
                               <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['target_sasaran']; ?></td>
+                              <td style="background-color:  rgb(112, 228, 112); "></td>
                               <td style="background-color:  rgb(112, 228, 112);" class="">
                                 <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                               </td>
@@ -183,9 +192,10 @@
                             ?>
                               <tr class="child-row">
                                 <td colspan="2"></td>
-                                <td colspan="4" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_3['kode_ikk'] . '] ' . $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
-                                <td colspan="2" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
+                                <td colspan="5" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_3['kode_ikk'] . '] ' . $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
+                                <td colspan="1" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
                                 <td style="background-color: burlywood;"><?php echo $branch_3['target_ikk']; ?></td>
+                                <td style="background-color: burlywood;"></td>
                                 <td style="background-color: burlywood;" class="">
                                   <a href="Form_Edit/InstrumentRenstra/ikk.php?indikator_kinerja_kegiatan_id=<?php echo $branch_3['ikk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                 </td>
@@ -215,6 +225,7 @@
                                   <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_4['kode_iksk'] . '] ' . $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
                                   <td colspan="1" style="background-color: aquamarine;"><?php echo $branch_4['unit'] ?></td>
                                   <td style="background-color: aquamarine;"><?php echo $branch_4['target_iksk']; ?></td>
+                                  <td style="background-color: aquamarine;"></td>
                                   <td style="background-color: aquamarine;" class="">
                                     <a href="Form_Edit/InstrumentRenstra/iksk.php?indikator_kinerja_sub_kegiatan_id=<?php echo $branch_4['iksk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                   </td>
@@ -243,7 +254,8 @@
                                     <td colspan="1" style="background-color: white; width: 10px; "><?php echo $branch_5['kode_ikuk'] ?></td>
                                     <td colspan="2" style="background-color: white;width: 24px; "><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
-                                    <td><?php echo $branch_5['target_ikuk']; ?></td>
+                                    <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['target_ikuk']; ?></td>
+                                    <td></td>
                                     <td class="">
                                       <a href="Form_Edit/InstrumentRenstra/ikuk.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                     </td>

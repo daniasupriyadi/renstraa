@@ -1,7 +1,6 @@
-=======
 -- Drop Database jika ada 
 DROP DATABASE renstraami;
->>>>>>> c6efee1e49c50da7622374cb7380c345d073e27e
+
 
 -- Membuat Database AMI
 CREATE DATABASE renstraami;
@@ -117,10 +116,14 @@ CREATE TABLE transaksi_sasaran_kegiatan(
 	PRIMARY KEY(transaksi_sasaran_kegiatan_id), 
 	CONSTRAINT FK_WAKTU_PELAKSANAAN
 		FOREIGN KEY(waktu_pelaksanaan_id)
-		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id), 
+		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE, 
 	CONSTRAINT FK_SKK_IDD
 		FOREIGN KEY(sasaran_kegiatan_id)
 		REFERENCES sasaran_kegiatan(sasaran_kegiatan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE transaksi_ikk(
@@ -131,10 +134,14 @@ CREATE TABLE transaksi_ikk(
 	PRIMARY KEY (transaksi_ikk_id),
 	CONSTRAINT FK_IKK_ID
 		FOREIGN KEY(indikator_kinerja_kegiatan_id)
-		REFERENCES indikator_kinerja_kegiatan(indikator_kinerja_kegiatan_id),
+		REFERENCES indikator_kinerja_kegiatan(indikator_kinerja_kegiatan_id)
+		ON DELETE CASCADE 
+		ON UPDATE CASCADE,
 	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKK
 		FOREIGN KEY(waktu_pelaksanaan_id)
 		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 
@@ -146,10 +153,14 @@ CREATE TABLE transaksi_iksk(
 	PRIMARY KEY(transaksi_iksk_id), 
 	CONSTRAINT FK_IKSK_id
 		FOREIGN KEY(indikator_kinerja_sub_kegiatan_id)
-		REFERENCES indikator_kinerja_sub_kegiatan(indikator_kinerja_sub_kegiatan_id), 
+		REFERENCES indikator_kinerja_sub_kegiatan(indikator_kinerja_sub_kegiatan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE, 
 	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKSK
 		FOREIGN KEY(waktu_pelaksanaan_id)
 		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 
 CREATE TABLE transaksi_ikuk(
@@ -160,10 +171,14 @@ CREATE TABLE transaksi_ikuk(
 	PRIMARY KEY(transaksi_ikuk_id), 
 	CONSTRAINT FK_IKUK
 		FOREIGN KEY(indikator_kinerja_unit_kerja_id)
-		REFERENCES  indikator_kinerja_unit_kerja(indikator_kinerja_unit_kerja_id),
+		REFERENCES  indikator_kinerja_unit_kerja(indikator_kinerja_unit_kerja_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE, 
 	CONSTRAINT FK_WAKTU_PELAKSANAAN_IKUK
 		FOREIGN KEY(waktu_pelaksanaan_id)
 		REFERENCES waktu_pelaksanaan(waktu_pelaksanaan_id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
 );
 	
 
@@ -194,7 +209,6 @@ INSERT INTO unit (nama_unit) values ('Prodi');-- 7
 INSERT INTO unit (nama_unit) values ('Ukarni');-- 8
 INSERT INTO unit (nama_unit) values ('Minat Bakat');-- 9
 INSERT INTO unit (nama_unit) values ('Penalaran');-- 10
-
 
 -- Insert Data Master Tujuan
 INSERT INTO tujuan(isi_tujuan) VALUES ('Terwujudnya kualitas sumber daya manusia untuk menghasilkan lulusan yang berdaya saing global');
@@ -243,9 +257,6 @@ INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, uni
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.12', 'Jumlah mahasiswa berprestasi juara 3  bidang akademik tingkat internasional', NULL);
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.13', 'Jumlah mahasiswa berprestasi juara 3 bidang non akademik tingkat internasional', NULL);
 -- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 10, 'U12.14', 'Jumlah mahasiswa berprestasi juara 1  bidang akademik tingkat nasional', NULL);
-<<<<<<< HEAD
--- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
 
-=======
--- INSERT INTO indikator_kinerja_unit_kerja (indikator_kinerja_sub_kegiatan_id, unit_id, kode_ikuk, isi_indikator_kinerja_unit_kerja, target_ikuk) VALUES (5, 9, 'U12.15', 'Jumlah mahasiswa berprestasi juara 1 bidang non akademik tingkat nasional', NULL);
->>>>>>> c6efee1e49c50da7622374cb7380c345d073e27e
+
+-- Insert Data User 

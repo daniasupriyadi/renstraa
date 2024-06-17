@@ -1,5 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" branch_1-theme="theme-default" branch_1-assets-path="../assets/" branch_1-template="vertical-menu-template-free">
+<!-- new -->
 
 <head>
   <title>Instrument Renstra</title>
@@ -77,13 +87,27 @@
             <div class="card">
               <h3 class="card-header">Tabel Instrument Tujuan Sasaran</h3>
               <div class="card-body">
-
-                <div class="d-flex flex-row mb-2">
-                  <a href="./Form_Tambah/tambah_instrument_tujuan_sasaran.php" type="button" class="btn btn-primary me-3">
-                    <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Tujuan Sasaran
-                  </a>
+                <div class="d-flex flex-row justify-content-between mb-2">
+                  <div>
+                    <a href="./Form_Tambah/tambah_instrument_tujuan_sasaran.php" type="button" class="btn btn-primary me-3">
+                      <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Tujuan Sasaran
+                    </a>
+                  </div>
+                  <!-- Success Message -->
+                  <?php
+                  if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
+                    $message_type = isset($_SESSION['message_type']) && $_SESSION['message_type'] == 'success' ? 'alert-primary' : 'alert-danger';
+                  ?>
+                    <div id="flash-message" class="alert <?= $message_type ?>" role="alert">
+                      <?= $_SESSION['message'] ?>
+                    </div>
+                  <?php
+                    unset($_SESSION['message']);
+                    unset($_SESSION['message_type']);
+                  }
+                  ?>
+                  <!-- End Success Message -->
                 </div>
-
                 <div class="table-responsive text-nowrap" style="max-height: 640px;">
                   <table style="width:100%; background-color:#FFFF; border:solid grey 2px; color: black;" class="table table-hover table-bordered">
                     <thead class="table-head" style="height: 48px;">

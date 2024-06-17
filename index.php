@@ -1,5 +1,5 @@
 <?php
 // Direct ke page Views
-header('Location: Views/Auth/login.php');
+header('Location: Views/index.php');
 exit;
 ?>

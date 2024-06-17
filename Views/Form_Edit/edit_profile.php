@@ -1,6 +1,15 @@
+<?php
+session_start();
+if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
+  header('Location: index.php');
+  exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
-
+<!-- new -->
 <head>
   <title>Profile</title>
   <?php
@@ -60,33 +69,21 @@
                   <div class="row">
                     <div class="mb-3 col-md-6">
                       <label for="firstName" class="form-label">Nama Lengkap</label>
-                      <input class="form-control" type="text" placeholder="Masukkan Nama Lengkap......" id="firstName" name="firstName" value="John" autofocus />
+                      <input class="form-control" type="text" placeholder="Masukkan Nama Lengkap......" id="firstName" name="firstName" value="<?php echo $_SESSION['nama']; ?>" autofocus />
                     </div>
                     <div class="mb-3 col-md-6">
                       <label for="lastName" class="form-label">NIP</label>
-                      <input class="form-control" type="text" name="email" id="emai" value="" placeholder="Masukkan Alamat Email......" />
+                      <input class="form-control" type="text" name="email" id="emai" value="<?php echo $_SESSION['nip']; ?>" placeholder="Masukkan Alamat Email......" />
                     </div>
                     <div class="mb-3 col-md-6">
                       <label for="email" class="form-label">E-mail</label>
-                      <input class="form-control" type="text" id="email" name="email" value="john.doe@example.com" placeholder="john.doe@example.com" />
+                      <input class="form-control" type="text" id="email" name="email" value="<?php echo $_SESSION['email']; ?>" placeholder="Masukkan Email....." />
                     </div>
                     <div class="mb-3 col-md-6">
-                      <label for="email" class="form-label">Password</label>
-                      <input class="form-control" type="text" id="email" name="email" value="john.doe@example.com" placeholder="john.doe@example.com" />
+                      <label for="email" class="form-label">Nama Unit</label>
+                      <input class="form-control" type="text" id="email" name="email" value="<?php echo $_SESSION['nama_unit']; ?>" placeholder="Masukkan Nama Unit....." disabled/>
                     </div>
 
-                    <div class="mb-3 col-md-6">
-                      <label class="form-label" for="phoneNumber">Phone Number</label>
-                      <div class="input-group input-group-merge">
-                        <span class="input-group-text">US (+1)</span>
-                        <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="202 555 0111" />
-                      </div>
-                    </div>
-                    <div class="mb-3 col-md-6">
-                      <label for="address" class="form-label">Address</label>
-                      <input type="text" class="form-control" id="address" name="address" placeholder="Address" />
-                    </div>
-                  </div>
                   <div class="mt-2">
                     <button type="submit" class="btn btn-primary me-2">Edit Data</button>
                   </div>

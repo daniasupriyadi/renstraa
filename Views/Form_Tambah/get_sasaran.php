@@ -1,4 +1,4 @@
-// get_sasaran.php
+<!-- get_sasaran.php -->
 <?php
     include('../../config.php');
 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('../../config.php');
+include('../../config.php'); // new
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isi_tujuan = $_POST["isi_tujuan"];

@@ -1,5 +1,5 @@
 <?php
-include('../../config.php');
+include('../../config.php'); // commit
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
