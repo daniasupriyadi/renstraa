@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
-  header('Location: index.php');
-  exit();
+    header('Location: index.php');
+    exit();
 }
 ?>
 
@@ -16,15 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
         $indikator_kinerja_unit_kerja_id = $_GET['indikator_kinerja_unit_kerja_id'];
 
         $query_ikuk = "SELECT 
-                        indikator_kinerja_unit_kerja_id as ikuk_id,
-                        isi_indikator_kinerja_unit_kerja as ikuk, 
-                        unit_id, 
-                        kode_ikuk, 
-                        target_ikuk
+                        indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id as ikuk_id,
+                        indikator_kinerja_unit_kerja.isi_indikator_kinerja_unit_kerja as ikuk, 
+                        indikator_kinerja_unit_kerja.unit_id, 
+                        indikator_kinerja_unit_kerja.kode_ikuk, 
+                        indikator_kinerja_unit_kerja.target_ikuk,
+                        tikuk.realisasi_ikuk
                     FROM    
                         indikator_kinerja_unit_kerja
+                    LEFT JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id
                     WHERE 
-                        indikator_kinerja_unit_kerja_id = '$indikator_kinerja_unit_kerja_id'
+                        indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id = '$indikator_kinerja_unit_kerja_id'
                     ";
         $fetch_query = mysqli_query($connection, $query_ikuk);
         $data_ikuk = mysqli_fetch_array($fetch_query);
@@ -40,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
 <head>
     <title>Tambah Unit/PIC</title>
     <?php
-    include ('../../Layout/head.php');
+    include('../../Layout/head.php');
     ?>
 </head>
 
@@ -95,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                         <textarea type="text" class="form-control " name="isi_indikator_kinerja_unit_kerja" id="isi_indikator_kinerja_unit_kerja" placeholder="Masukkan Indikator Kinerja Unit Kerja....." aria-describedby="defaultFormControlHelp" value=""><?php echo $data_ikuk['ikuk']; ?></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="" style="width: 15%;">
+                                                <div class="" style="width: 10%;">
                                                     <div class="pic-container">
                                                         <label for="picSelect" class="form-label">Pilih PIC/Unit</label>
                                                         <select class="form-select" name="unit_id_ikuk" id="unit_id_ikuk">
@@ -111,10 +113,16 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class="" style="width: 15%;">
+                                                <div class="" style="width: 10%;">
                                                     <div class="">
                                                         <label for="" class="form-label">Target IKUK</label>
                                                         <input type="number" class="form-control" name="target_ikuk" id="target_ikuk" placeholder="Target IKUK...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_ikuk['target_ikuk'] ?>"></input>
+                                                    </div>
+                                                </div>
+                                                <div class="" style="width: 10%;">
+                                                    <div class="">
+                                                        <label for="" class="form-label">Realisasi IKUK</label>
+                                                        <input type="number" class="form-control" name="realisasi_ikuk" id="realisasi_ikuk" placeholder="Realisasi IKUK...." aria-describedby="defaultFormControlHelp" value="<?php echo $data_ikuk['realisasi_ikuk'] ?>"></input>
                                                     </div>
                                                 </div>
 

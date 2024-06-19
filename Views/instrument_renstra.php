@@ -9,6 +9,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" branch_1-theme="theme-default" branch_1-assets-path="../assets/" branch_1-template="vertical-menu-template-free">
 <!-- new -->
+
 <head>
   <title>Instrument Renstra</title>
   <?php
@@ -153,9 +154,8 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                                   sasaran_kegiatan
                                                 INNER JOIN 
                                                   unit ON unit.unit_id = sasaran_kegiatan.unit_id
-                                                INNER JOIN transaksi_sasaran_kegiatan tsk ON tsk.sasaran_kegiatan_id = sasaran_kegiatan.sasaran_kegiatan_id 
-                                                 INNER JOIN 
-                                                  indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
+                                                LEFT JOIN transaksi_sasaran_kegiatan tsk ON tsk.sasaran_kegiatan_id = sasaran_kegiatan.sasaran_kegiatan_id 
+                                                LEFT JOIN                                                indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
                                                 WHERE 
                                                   tujuan_id = {$branch_1['tujuan_id']}
                                                 ");
@@ -186,7 +186,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                         tk.realisasi_ikk as realisasi_ikk
                                       FROM 
                                         indikator_kinerja_kegiatan
-                                      INNER JOIN transaksi_ikk tk ON tk.indikator_kinerja_kegiatan_id = indikator_kinerja_kegiatan. indikator_kinerja_kegiatan_id
+                                      LEFT JOIN transaksi_ikk tk ON tk.indikator_kinerja_kegiatan_id = indikator_kinerja_kegiatan. indikator_kinerja_kegiatan_id
                                       LEFT JOIN  
                                         unit ON unit.unit_id = indikator_kinerja_kegiatan.unit_id
                                       WHERE  
@@ -218,7 +218,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                           tiksk.realisasi_iksk as realisasi_iksk
                                         FROM 
                                           indikator_kinerja_sub_kegiatan
-                                        INNER JOIN transaksi_iksk tiksk ON tiksk.indikator_kinerja_sub_kegiatan_id =  indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id
+                                        LEFT JOIN transaksi_iksk tiksk ON tiksk.indikator_kinerja_sub_kegiatan_id =  indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id
                                         LEFT JOIN 
                                           unit ON indikator_kinerja_sub_kegiatan.unit_id = unit.unit_id
                                         WHERE 
@@ -249,7 +249,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                             tikuk.realisasi_ikuk as realisasi_ikuk
                                           FROM 
                                             indikator_kinerja_unit_kerja
-                                          INNER JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id
+                                          LEFT JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id
                                           LEFT JOIN 
                                             unit ON indikator_kinerja_unit_kerja.unit_id = unit.unit_id
                                           WHERE 

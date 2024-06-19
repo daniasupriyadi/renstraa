@@ -2,10 +2,10 @@
 // Koneksi db
 
 // ini database localhost
-$dbHost = 'localhost:3306';
-$dbName = 'renstra_ami';
+$dbHost = 'localhost:3308';
+$dbName = 'renstraami';
 $dbUsername = 'root';
-$dbPassword = 'Okokokdalll1';
+$dbPassword = '';
 
 // ini database server
 // $dbHost = 'kanade.kawaiihost.net';

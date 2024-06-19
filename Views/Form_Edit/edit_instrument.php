@@ -1,8 +1,8 @@
 <?php
 session_start();
 if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
-  header('Location: index.php');
-  exit();
+    header('Location: index.php');
+    exit();
 }
 ?>
 
@@ -28,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'GET') {
         $fetch_query = mysqli_query($connection, $query_ikuk);
         $data_ikuk = mysqli_fetch_array($fetch_query);
     }
-    
 }
 ?>
 
