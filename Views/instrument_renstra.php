@@ -132,7 +132,8 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                             <td colspan="10" style="background-color: antiquewhite;">
                               <span class="toggle-row">[+]</span><?php echo $branch_1['tujuan_id'] . '. ' . $branch_1['isi_tujuan']; ?>
                             </td>
-                            <!-- <td style="background-color: antiquewhite;"></td> -->
+                            <td style="background-color: antiquewhite;"></td>
+                            <td style="background-color: antiquewhite;"></td>
                             <td style="background-color: antiquewhite;" class="">
                               <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                             </td>
@@ -147,11 +148,12 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                                     (sasaran_kegiatan.sasaran_kegiatan_id) as sk_id, 
                                                     (isi_sasaran_kegiatan), 
                                                     unit.nama_unit as pic, 
-                                                    target_sasaran
+                                                    sasaran_kegiatan.target_sasaran, tsk.realisasi_sasaran_kegiatan as realisasi_sasaran
                                                 FROM 
                                                   sasaran_kegiatan
                                                 INNER JOIN 
                                                   unit ON unit.unit_id = sasaran_kegiatan.unit_id
+                                                INNER JOIN transaksi_sasaran_kegiatan tsk ON tsk.sasaran_kegiatan_id = sasaran_kegiatan.sasaran_kegiatan_id 
                                                  INNER JOIN 
                                                   indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
                                                 WHERE 
@@ -164,7 +166,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                               <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo '' . $branch_2['sk_id'] . '. ' . $branch_2['isi_sasaran_kegiatan'] ?></td>
                               <td colspan="1" style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['pic'] ?></td>
                               <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['target_sasaran']; ?></td>
-                              <td style="background-color:  rgb(112, 228, 112); "></td>
+                              <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['realisasi_sasaran']; ?></td>
                               <td style="background-color:  rgb(112, 228, 112);" class="">
                                 <a href=""><span class="tf-icons bx bx-pencil text-center"></span></a>
                               </td>
@@ -180,9 +182,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                         indikator_kinerja_kegiatan.kode_ikk as kode_ikk,
                                         isi_indikator_kinerja_kegiatan, 
                                         unit.nama_unit as unit, 
-                                        target_ikk
+                                        target_ikk,
+                                        tk.realisasi_ikk as realisasi_ikk
                                       FROM 
                                         indikator_kinerja_kegiatan
+                                      INNER JOIN transaksi_ikk tk ON tk.indikator_kinerja_kegiatan_id = indikator_kinerja_kegiatan. indikator_kinerja_kegiatan_id
                                       LEFT JOIN  
                                         unit ON unit.unit_id = indikator_kinerja_kegiatan.unit_id
                                       WHERE  
@@ -195,7 +199,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                 <td colspan="5" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_3['kode_ikk'] . '] ' . $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
                                 <td colspan="1" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
                                 <td style="background-color: burlywood;"><?php echo $branch_3['target_ikk']; ?></td>
-                                <td style="background-color: burlywood;"></td>
+                                <td style="background-color: burlywood;"><?php echo $branch_3['realisasi_ikk']; ?></td>
                                 <td style="background-color: burlywood;" class="">
                                   <a href="Form_Edit/InstrumentRenstra/ikk.php?indikator_kinerja_kegiatan_id=<?php echo $branch_3['ikk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                 </td>
@@ -210,9 +214,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                           kode_iksk, 
                                           isi_indikator_kinerja_sub_kegiatan, 
                                           unit.nama_unit as unit, 
-                                          target_iksk
+                                          target_iksk,
+                                          tiksk.realisasi_iksk as realisasi_iksk
                                         FROM 
                                           indikator_kinerja_sub_kegiatan
+                                        INNER JOIN transaksi_iksk tiksk ON tiksk.indikator_kinerja_sub_kegiatan_id =  indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id
                                         LEFT JOIN 
                                           unit ON indikator_kinerja_sub_kegiatan.unit_id = unit.unit_id
                                         WHERE 
@@ -225,7 +231,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                   <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_4['kode_iksk'] . '] ' . $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
                                   <td colspan="1" style="background-color: aquamarine;"><?php echo $branch_4['unit'] ?></td>
                                   <td style="background-color: aquamarine;"><?php echo $branch_4['target_iksk']; ?></td>
-                                  <td style="background-color: aquamarine;"></td>
+                                  <td style="background-color: aquamarine;"><?php echo $branch_4['realisasi_iksk']; ?></td>
                                   <td style="background-color: aquamarine;" class="">
                                     <a href="Form_Edit/InstrumentRenstra/iksk.php?indikator_kinerja_sub_kegiatan_id=<?php echo $branch_4['iksk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                   </td>
@@ -239,9 +245,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                             kode_ikuk, 
                                             isi_indikator_kinerja_unit_kerja, 
                                             unit.nama_unit as unit, 
-                                            target_ikuk
+                                            target_ikuk,
+                                            tikuk.realisasi_ikuk as realisasi_ikuk
                                           FROM 
                                             indikator_kinerja_unit_kerja
+                                          INNER JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id
                                           LEFT JOIN 
                                             unit ON indikator_kinerja_unit_kerja.unit_id = unit.unit_id
                                           WHERE 
@@ -255,7 +263,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                     <td colspan="2" style="background-color: white;width: 24px; "><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['target_ikuk']; ?></td>
-                                    <td></td>
+                                    <td><?php echo $branch_5['realisasi_ikuk']; ?></td>
                                     <td class="">
                                       <a href="Form_Edit/InstrumentRenstra/ikuk.php?indikator_kinerja_unit_kerja_id=<?php echo $branch_5['indikator_kinerja_unit_kerja_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                                     </td>
