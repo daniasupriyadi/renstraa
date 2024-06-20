@@ -94,6 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
             $idData = $connection->query($queryID)->fetch_assoc();
 
             // ID LIST
+            $transaksi_ikuk_id = $idData["transaksi_ikuk_id"];
+            $ikuk_id = $idData["ikuk_id"];
             $iksk_id = $idData["iksk_id"];
             $transaksi_iksk_id = $idData["transaksi_iksk_id"];
             $ikk_id = $idData["ikk_id"];
@@ -101,15 +103,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
             $transaksi_sasaran_kegiatan_id = $idData['transaksi_sasaran_kegiatan_id'];
             $sasaran_id = $idData['sasaran_id'];
 
+            if ($transaksi_ikuk_id !== null) {
+                $connection->query(
+                    "UPDATE transaksi_ikuk SET realisasi_ikuk = $realisasi_ikuk WHERE transaksi_ikuk_id = $transaksi_ikuk_id"
+                );
+            } else {
+                $connection->query(
+                    "INSERT INTO transaksi_ikuk(indikator_kinerja_unit_kerja_id, realisasi_ikuk) VALUES ($ikuk_id, $realisasi_ikuk)"
+                );
+            }
+
             $listIKUK = $connection->query("SELECT tikuk.*, ikuk.target_ikuk
                                             FROM indikator_kinerja_sub_kegiatan iksk
                                             INNER JOIN indikator_kinerja_unit_kerja ikuk on ikuk.indikator_kinerja_sub_kegiatan_id = iksk.indikator_kinerja_sub_kegiatan_id
                                             LEFT JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = ikuk.indikator_kinerja_unit_kerja_id
-                                            WHERE iksk.indikator_kinerja_sub_kegiatan_id = '$idIKSK'")->fetch_assoc();
+                                            WHERE iksk.indikator_kinerja_sub_kegiatan_id = '$iksk_id'");
             // Realisasi IKSK
-            $realisasiIksk = 0;
-            while ($row = $listIKUK) {
-                $realisasiIksk += $row['realisasi_ikuk'] * $row['target_ikuk'];
+            $realisasiIKSK = 0;
+
+            while ($row = $listIKUK->fetch_assoc()) {
+                $realisasiIKSK += $row['realisasi_ikuk'] * $row['target_ikuk'];
             }
             $realisasiIKSK = $realisasiIKSK / 600 * 100;
 
@@ -117,30 +130,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
                 // EDIT YANG ADA
                 $connection->query("UPDATE transaksi_iksk
                                     SET realisasi_iksk = $realisasiIKSK
-                                    WHERE transaksi_iksk_id = $transaksi_iksk_id");
+                                    WHERE transaksi_iksk_id = '$transaksi_iksk_id'");
             } else {
                 // CREATE KOLOM Baru
-                $connection->query("INSERT INTO transaksi_iksk(indikator_kinerja_sub_kegiatan_id, realisasi_iksk) VALUES ($iksk_id, $realisasiIKSK)");
+                $connection->query("INSERT INTO transaksi_iksk(indikator_kinerja_sub_kegiatan_id, realisasi_iksk) VALUES ('$iksk_id', $realisasiIKSK)");
             }
 
             // Realisasi IKK
-            // SUM OF IKSK
-
-            // TODO: CEK INFINITE LOOPING
             $realisasiIKK = 0;
-            while ($row = $connection->query(
+            $listIKSK = $connection->query(
                 "SELECT tiksk.*
                 FROM indikator_kinerja_kegiatan ikk
                 INNER JOIN indikator_kinerja_sub_kegiatan iksk ON iksk.indikator_kinerja_kegiatan_id = ikk.indikator_kinerja_kegiatan_id
                 LEFT JOIN transaksi_iksk tiksk ON tiksk.indikator_kinerja_sub_kegiatan_id = iksk.indikator_kinerja_sub_kegiatan_id
                 WHERE ikk.indikator_kinerja_kegiatan_id = $ikk_id"
-            )->fetch_assoc()) {
-                $realisasiIKK += $row["realisasi_iksk"];
+            );
+
+            while ($row = $listIKSK->fetch_assoc()) {
+                if ($row["realisasi_iksk"]) {
+                    $realisasiIKK += $row["realisasi_iksk"];
+                }
+                $realisasiIKK += 0;
             }
 
-            if ($idData['transaksi_iksk_id']) {
+            if ($transaksi_ikk_id !== null) {
                 $connection->query(
-                    "UPDATE transaksi_ikk SET realisasi_ikk = $realisasiIKK WHERE transaksi_ikk_id = $transaksi_ikk_id"
+                    "UPDATE transaksi_ikk SET realisasi_ikk = $realisasiIKK WHERE transaksi_ikk_id = '$transaksi_ikk_id'"
                 );
             } else {
                 $connection->query(
@@ -152,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // new
             $selectQuery = "SELECT transaksi_ikk.*, ikk.target_ikk
             FROM transaksi_ikk
             INNER JOIN indikator_kinerja_kegiatan ikk ON ikk.indikator_kinerja_kegiatan_id = transaksi_ikk.indikator_kinerja_kegiatan_id
-            WHERE ikk.indikator_kinerja_kegiatan_id = $indikator_kinerja_kegiatan_id";
+            WHERE ikk.indikator_kinerja_kegiatan_id = $ikk_id";
 
             $result = $connection->query($selectQuery);
 
