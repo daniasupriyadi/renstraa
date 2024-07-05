@@ -1,14 +1,15 @@
 <?php
 session_start();
 if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
-  header('Location: index.php');
-  exit();
+    header('Location: index.php');
+    exit();
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-assets-path="../../assets/" data-template="vertical-menu-template-free">
 <!-- new -->
+
 <head>
     <title>Tambah Unit/PIC</title>
     <?php
@@ -329,7 +330,14 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                 <script>
                     document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('addIKUK').addEventListener('click', function() {
+
                             var ikukTemplate = document.querySelector('.ikuk-template').cloneNode(true);
+
+                            var inputs = ikukTemplate.querySelectorAll('textarea, input');
+                            inputs.forEach(function(input) {
+                                input.value = '';
+                            });
+
                             var ikukFields = document.querySelector('.ikuk-fields');
                             ikukFields.appendChild(ikukTemplate);
                         });

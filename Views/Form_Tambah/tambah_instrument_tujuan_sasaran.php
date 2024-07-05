@@ -153,6 +153,12 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                     document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('addIKUK').addEventListener('click', function() {
                             var ikukTemplate = document.querySelector('.ikuk-template').cloneNode(true);
+
+                            var inputs = ikukTemplate.querySelectorAll('textarea, input');
+                            inputs.forEach(function(input) {
+                                input.value = '';
+                            });
+                            
                             var ikukFields = document.querySelector('.ikuk-fields');
                             ikukFields.appendChild(ikukTemplate);
                         });
