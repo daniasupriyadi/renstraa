@@ -10,6 +10,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" branch_1-theme="theme-default" branch_1-assets-path="../assets/" branch_1-template="vertical-menu-template-free">
 <!-- new -->
 
+
 <head>
   <title>Instrument Renstra</title>
   <?php
@@ -162,13 +163,13 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                                     (sasaran_kegiatan.sasaran_kegiatan_id) as sk_id, 
                                                     (isi_sasaran_kegiatan), 
                                                     unit.nama_unit as pic, 
-                                                    target_sasaran
+                                                    sasaran_kegiatan.target_sasaran, tsk.realisasi_sasaran_kegiatan as realisasi_sasaran
                                                 FROM 
                                                   sasaran_kegiatan
                                                 INNER JOIN 
                                                   unit ON unit.unit_id = sasaran_kegiatan.unit_id
-                                                 INNER JOIN 
-                                                  indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
+                                                LEFT JOIN transaksi_sasaran_kegiatan tsk ON tsk.sasaran_kegiatan_id = sasaran_kegiatan.sasaran_kegiatan_id 
+                                                LEFT JOIN                                                indikator_kinerja_kegiatan ON sasaran_kegiatan.sasaran_kegiatan_id = indikator_kinerja_kegiatan.sasaran_kegiatan_id
                                                 WHERE 
                                                   tujuan_id = {$branch_1['tujuan_id']}
                                                 ");
@@ -179,7 +180,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                               <td colspan="6" style="background-color:  rgb(112, 228, 112);"><span class="toggle-row">[+]</span><?php echo '' . $branch_2['sk_id'] . '. ' . $branch_2['isi_sasaran_kegiatan'] ?></td>
                               <td colspan="1" style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['pic'] ?></td>
                               <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['target_sasaran']; ?></td>
-                              <td style="background-color:  rgb(112, 228, 112); "></td>
+                              <td style="background-color:  rgb(112, 228, 112); "><?php echo $branch_2['realisasi_sasaran']; ?></td>
 
                               <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                                 <td style="background-color:  rgb(112, 228, 112);" class="">
@@ -200,9 +201,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                         indikator_kinerja_kegiatan.kode_ikk as kode_ikk,
                                         isi_indikator_kinerja_kegiatan, 
                                         unit.nama_unit as unit, 
-                                        target_ikk
+                                        target_ikk,
+                                        tk.realisasi_ikk as realisasi_ikk
                                       FROM 
                                         indikator_kinerja_kegiatan
+                                      LEFT JOIN transaksi_ikk tk ON tk.indikator_kinerja_kegiatan_id = indikator_kinerja_kegiatan. indikator_kinerja_kegiatan_id
                                       LEFT JOIN  
                                         unit ON unit.unit_id = indikator_kinerja_kegiatan.unit_id
                                       WHERE  
@@ -215,7 +218,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                 <td colspan="5" style="background-color: burlywood;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_3['kode_ikk'] . '] ' . $branch_3['isi_indikator_kinerja_kegiatan'] ?></td>
                                 <td colspan="1" style="background-color: burlywood; width: 10px; white-space: pre-line; word-wrap: break-word; text-align: justify; color: black"><?php echo $branch_3['unit'] ?></td>
                                 <td style="background-color: burlywood;"><?php echo $branch_3['target_ikk']; ?></td>
-                                <td style="background-color: burlywood;"></td>
+                                <td style="background-color: burlywood;"><?php echo $branch_3['realisasi_ikk']; ?></td>
 
                                 <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                                   <td style="background-color: burlywood;" class="">
@@ -235,9 +238,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                           kode_iksk, 
                                           isi_indikator_kinerja_sub_kegiatan, 
                                           unit.nama_unit as unit, 
-                                          target_iksk
+                                          target_iksk,
+                                          tiksk.realisasi_iksk as realisasi_iksk
                                         FROM 
                                           indikator_kinerja_sub_kegiatan
+                                        LEFT JOIN transaksi_iksk tiksk ON tiksk.indikator_kinerja_sub_kegiatan_id =  indikator_kinerja_sub_kegiatan.indikator_kinerja_sub_kegiatan_id
                                         LEFT JOIN 
                                           unit ON indikator_kinerja_sub_kegiatan.unit_id = unit.unit_id
                                         WHERE 
@@ -250,7 +255,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                   <td colspan="4" style="background-color: aquamarine;"><span class="toggle-row">[+]</span><?php echo '[' . $branch_4['kode_iksk'] . '] ' . $branch_4['isi_indikator_kinerja_sub_kegiatan'] ?></td>
                                   <td colspan="1" style="background-color: aquamarine;"><?php echo $branch_4['unit'] ?></td>
                                   <td style="background-color: aquamarine;"><?php echo $branch_4['target_iksk']; ?></td>
-                                  <td style="background-color: aquamarine;"></td>
+                                  <td style="background-color: aquamarine;"><?php echo $branch_4['realisasi_iksk']; ?></td>
 
                                   <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                                     <td style="background-color: aquamarine;" class="">
@@ -269,9 +274,11 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                             kode_ikuk, 
                                             isi_indikator_kinerja_unit_kerja, 
                                             unit.nama_unit as unit, 
-                                            target_ikuk
+                                            target_ikuk,
+                                            tikuk.realisasi_ikuk as realisasi_ikuk
                                           FROM 
                                             indikator_kinerja_unit_kerja
+                                          LEFT JOIN transaksi_ikuk tikuk ON tikuk.indikator_kinerja_unit_kerja_id = indikator_kinerja_unit_kerja.indikator_kinerja_unit_kerja_id
                                           LEFT JOIN 
                                             unit ON indikator_kinerja_unit_kerja.unit_id = unit.unit_id
                                           WHERE 
@@ -285,7 +292,7 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                                     <td colspan="2" style="background-color: white;width: 24px; "><?php echo $branch_5['isi_indikator_kinerja_unit_kerja'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['unit'] ?></td>
                                     <td colspan="" style="background-color: white; width: 10px;"><?php echo $branch_5['target_ikuk']; ?></td>
-                                    <td></td>
+                                    <td><?php echo $branch_5['realisasi_ikuk']; ?></td>
 
                                     <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                                       <td class="">

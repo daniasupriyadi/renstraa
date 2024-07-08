@@ -86,7 +86,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $realisasiSasaran = 0;
 
     if ($result->num_rows > 0) {
-        echo 'TATA';
         while ($row = $result->fetch_assoc()) {
             if ($row['realisasi_ikk'] >= $row['target_ikk']) {
                 $realisasiSasaran += 1;
