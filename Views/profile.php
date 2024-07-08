@@ -63,11 +63,16 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                             <div class="me-3">
                               <span class="card-title" style="font-size: 20px; font-weight: bold;">Detail Profil</span>
                             </div>
-                            <div class="">
-                              <a href="Form_Edit/edit_profile.php">
-                                <i class='bx bxs-pencil' style="font-size: 22px;"></i>
-                              </a>
-                            </div>
+
+                            <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
+                              <div class="">
+                                <a href="Form_Edit/edit_profile.php">
+                                  <i class='bx bxs-pencil' style="font-size: 22px;"></i>
+                                </a>
+                              </div>
+                            <?php
+                            }
+                            ?>
                           </div>
 
                           <div class="row mt-2">

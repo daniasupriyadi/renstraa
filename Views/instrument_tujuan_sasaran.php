@@ -88,11 +88,15 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
               <h3 class="card-header">Tabel Instrument Tujuan Sasaran</h3>
               <div class="card-body">
                 <div class="d-flex flex-row justify-content-between mb-2">
-                  <div>
-                    <a href="./Form_Tambah/tambah_instrument_tujuan_sasaran.php" type="button" class="btn btn-primary me-3">
-                      <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Tujuan Sasaran
-                    </a>
-                  </div>
+                  <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
+                    <div>
+                      <a href="./Form_Tambah/tambah_instrument_tujuan_sasaran.php" type="button" class="btn btn-primary me-3">
+                        <span class="tf-icons bx bx-plus"></span>&nbsp;Tambah Tujuan Sasaran
+                      </a>
+                    </div>
+                  <?php
+                  }
+                  ?>
                   <!-- Success Message -->
                   <?php
                   if (isset($_SESSION['message']) && !empty($_SESSION['message'])) {
@@ -116,8 +120,12 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                         <th rowspan="">Sasaran Kegiatan</th>
                         <th rowspan="">Unit</th>
                         <th rowspan="">Target</th>
-                        <th rowspan="" colspan="">Edit</th>
-                        <th rowspan="" colspan="">Hapus</th>
+                        <?php if (isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
+                          <th rowspan="" colspan="">Edit</th>
+                          <th rowspan="" colspan="">Hapus</th>
+                        <?php
+                        }
+                        ?>
                       </tr>
 
                     </thead>
@@ -143,12 +151,16 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
                             <td colspan="4" style="background-color: aquamarine;">
                               <span class="toggle-row">[+]</span><?php echo $no_parent++ . '. ' . $branch_1['isi_tujuan']; ?>
                             </td>
+                            <?php if(isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                             <td style="background-color: aquamarine;">
                               <a href="Form_Edit/InstrumentTujuanSasaran/tujuan.php?tujuan_id=<?php echo $branch_1['tujuan_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                             </td>
                             <td style="background-color: aquamarine;">
                               <a href="../Controllers/Delete_Data/instrument_tujuan_sasaran.php?tujuan_id=<?php echo $branch_1['tujuan_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Tujuan <?php echo $branch_1['tujuan_id'] . ' : ' . $branch_1['isi_tujuan'] . ', dan Beserta Dengan Turunannya' ?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                             </td>
+                            <?php 
+                            }
+                            ?>
                           </tr>
 
                           <!-- Query Sasaran Kegiatan -->
@@ -180,12 +192,16 @@ if (!isset($_SESSION['nama']) && !isset($_SESSION['email'])) {
 
                               <td colspan="1" style="background-color: white;"><?php echo $branch_2['pic']; ?></td>
                               <td colspan="1" style="background-color: white;"><?php echo $branch_2['target_sasaran']; ?></td>
+                              <?php if(isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') { ?>
                               <td style="background-color: white;">
                                 <a href="Form_Edit/InstrumentTujuanSasaran/sasaran.php?sasaran_kegiatan_id=<?php echo $branch_2['sk_id']; ?>"><span class="tf-icons bx bx-pencil text-center"></span></a>
                               </td>
                               <td style="background-color: white;">
                                 <a href="../Controllers/Delete_Data/instrument_tujuan_sasaran.php?sasaran_kegiatan_id=<?php echo $branch_2['sk_id']; ?>" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Sasaran <?php echo $branch_2['sk_id'] . ' : ' . $branch_2['isi_sasaran_kegiatan'] . '' ?> ')"><span class="tf-icons bx bx-trash" style="color: red;"></span></a>
                               </td>
+                              <?php
+                              }
+                              ?>
                             </tr>
                         <?php
                           }

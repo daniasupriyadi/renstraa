@@ -98,11 +98,17 @@ function isPageActive($pageName)
             <div data-i18n="Without navbar">Instrument Renstra</div>
           </a>
         </li>
+
+        <?php if(isset($_SESSION['nama_unit']) && $_SESSION['nama_unit'] !== 'user') {?>
         <li class="menu-item <?php echo isPageActive(['daftar_user.php', 'edit_daftar_pengguna.php', 'tambah_user.php']) ?>">
           <a href="<?php echo $base_url ?>/Views/daftar_user.php" class="menu-link">
             <div data-i18n="Without navbar">Daftar User</div>
           </a>
         </li>
+        <?php
+        }
+        ?>
+
       </ul>
     </li>
 
